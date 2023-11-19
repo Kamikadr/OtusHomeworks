@@ -25,10 +25,10 @@ namespace ShootEmUp.Enemies
         private void Start()
         {
             _isNeedSpawningEnemies = true;
-            StartCoroutine(StartAddingEnemies());
+            StartCoroutine(SpawnEnemiesCoroutine());
         }
 
-        private IEnumerator StartAddingEnemies()
+        private IEnumerator SpawnEnemiesCoroutine()
         {
             while (_isNeedSpawningEnemies)
             {

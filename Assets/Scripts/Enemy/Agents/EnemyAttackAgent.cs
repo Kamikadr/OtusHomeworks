@@ -1,5 +1,4 @@
 using System;
-using ShootEmUp;
 using UnityEngine;
 
 namespace ShootEmUp
@@ -7,7 +6,7 @@ namespace ShootEmUp
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
         [SerializeField] private CooldownCounter cooldownCounter;
-        [SerializeField] private Attacker attacker;
+        [SerializeField] private FireSetup fireSetup;
         
         public event Action<GameObject, Vector2, Vector2> OnFire;
         
@@ -21,11 +20,11 @@ namespace ShootEmUp
         }
         public void SetTarget(GameObject target)
         {
-            attacker.SetTarget(target);
+            fireSetup.SetTarget(target);
         }
         private void Fire()
         {
-            if (attacker.TryGetFireData(out var fireData))
+            if (fireSetup.TryGetFireData(out var fireData))
             {
                 OnFire?.Invoke(fireData.sender, fireData.position, fireData.direction);
             }

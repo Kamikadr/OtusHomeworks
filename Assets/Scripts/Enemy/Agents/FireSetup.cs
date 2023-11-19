@@ -2,7 +2,7 @@
 
 namespace ShootEmUp
 {
-    public class Attacker: MonoBehaviour
+    public class FireSetup: MonoBehaviour
     {
         [SerializeField] private WeaponComponent weaponComponent;
         private GameObject _target;

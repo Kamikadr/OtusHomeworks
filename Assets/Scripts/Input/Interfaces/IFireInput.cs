@@ -1,6 +1,6 @@
 using System;
 
-namespace ShootEmUp
+namespace ShootEmUp.GameInput
 {
     public interface IFireInput
     {

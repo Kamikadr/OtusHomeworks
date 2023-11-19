@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.GameInput
 {
     public sealed class KeyboardInput : MonoBehaviour, IFireInput, IMoveInput
     {
@@ -10,7 +10,7 @@ namespace ShootEmUp
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetKey(KeyCode.Space))
             {
                 OnFireEvent?.Invoke();
             }

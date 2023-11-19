@@ -1,7 +1,9 @@
 ﻿using System;
+using ShootEmUp.Bullets;
+using ShootEmUp.GameInput;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Characters
 {
     public class CharacterActionController: MonoBehaviour
     {

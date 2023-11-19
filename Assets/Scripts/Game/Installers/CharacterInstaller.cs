@@ -1,8 +1,9 @@
-﻿using System;
+﻿using ShootEmUp.Bullets;
+using ShootEmUp.Characters;
+using ShootEmUp.GameInput;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace ShootEmUp.Game.Installers
 {
     public class CharacterInstaller: MonoBehaviour
     {

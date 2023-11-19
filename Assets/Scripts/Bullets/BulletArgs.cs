@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Bullets
 {
     public struct BulletArgs
     {

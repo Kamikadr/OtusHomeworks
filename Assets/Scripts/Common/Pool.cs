@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Common
 {
     public class Pool<T> where T: MonoBehaviour
     {

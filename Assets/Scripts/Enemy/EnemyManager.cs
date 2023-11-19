@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using ShootEmUp.Bullets;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Enemies
 {
     public sealed class EnemyManager : MonoBehaviour
     {

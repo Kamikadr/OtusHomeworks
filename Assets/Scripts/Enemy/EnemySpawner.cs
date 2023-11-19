@@ -1,13 +1,13 @@
-using System.Collections.Generic;
+using ShootEmUp.Common;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Enemies
 {
     public sealed class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private Transform worldTransform;
         [SerializeField] private int initializeEnemyCount;
-        private  Pool<Enemy> _enemyPool;
+        private Pool<Enemy> _enemyPool;
 
         public void Initialize(Pool<Enemy> enemyPool)
         {

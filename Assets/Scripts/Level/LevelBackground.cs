@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace ShootEmUp.Level
 {
     public sealed class LevelBackground : MonoBehaviour
     {

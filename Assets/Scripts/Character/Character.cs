@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using UnityEngine.Serialization;
+﻿using ShootEmUp.Common;
 
-namespace ShootEmUp
+namespace ShootEmUp.Characters
 {
     public class Character: Unit
     {

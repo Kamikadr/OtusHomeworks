@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Game
 {
     public sealed class GameManager : MonoBehaviour, IGameManager
     {

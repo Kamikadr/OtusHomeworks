@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using ShootEmUp.Bullets;
+using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Characters
 {
     public class CharacterBulletArgsFactory: BulletArgsFactory
     {

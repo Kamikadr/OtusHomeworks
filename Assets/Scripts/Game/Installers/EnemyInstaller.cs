@@ -1,7 +1,10 @@
-﻿using System;
+﻿using ShootEmUp.Bullets;
+using ShootEmUp.Characters;
+using ShootEmUp.Common;
+using ShootEmUp.Enemies;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Game.Installers
 {
     public class EnemyInstaller: MonoBehaviour
     {

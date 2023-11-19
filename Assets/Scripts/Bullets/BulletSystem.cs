@@ -1,8 +1,9 @@
-using System;
 using System.Collections.Generic;
+using ShootEmUp.Common;
+using ShootEmUp.Level;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Bullets
 {
     public sealed class BulletSystem : MonoBehaviour, IBulletSystem
     {

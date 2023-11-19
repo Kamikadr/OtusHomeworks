@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ShootEmUp.Common;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace ShootEmUp.Enemies
 {
     public class Enemy: Unit
     {

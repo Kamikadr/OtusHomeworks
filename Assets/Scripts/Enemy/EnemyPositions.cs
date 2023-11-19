@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Enemies
 {
     public sealed class EnemyPositions : MonoBehaviour
     {

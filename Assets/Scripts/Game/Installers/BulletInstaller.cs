@@ -1,7 +1,8 @@
-﻿using System;
+﻿using ShootEmUp.Bullets;
+using ShootEmUp.Common;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Game.Installers
 {
     public class BulletInstaller: MonoBehaviour
     {

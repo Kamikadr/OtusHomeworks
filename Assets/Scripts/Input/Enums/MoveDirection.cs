@@ -1,4 +1,4 @@
-namespace ShootEmUp
+namespace ShootEmUp.GameInput
 {
     public enum MoveDirection
     {

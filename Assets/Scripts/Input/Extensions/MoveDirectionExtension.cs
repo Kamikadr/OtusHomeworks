@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.GameInput
 {
     public static class MoveDirectionExtension
     {

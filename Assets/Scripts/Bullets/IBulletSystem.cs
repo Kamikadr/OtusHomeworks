@@ -1,4 +1,4 @@
-﻿namespace ShootEmUp
+﻿namespace ShootEmUp.Bullets
 {
     public interface IBulletSystem
     {

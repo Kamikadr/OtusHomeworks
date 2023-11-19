@@ -1,8 +1,7 @@
-﻿using System;
+﻿using ShootEmUp.Game;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace ShootEmUp.Characters
 {
     public class CharacterDeathObserver: MonoBehaviour
     {

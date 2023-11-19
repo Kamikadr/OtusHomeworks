@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace ShootEmUp.Common
 {
     public class Factory<T> where T:MonoBehaviour
     {

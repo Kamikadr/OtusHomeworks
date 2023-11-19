@@ -1,6 +1,7 @@
-﻿using UnityEngine;
+﻿using ShootEmUp.Componets;
+using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Common
 {
     public class Unit: MonoBehaviour
     {

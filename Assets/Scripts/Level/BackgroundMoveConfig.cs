@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace ShootEmUp
+namespace ShootEmUp.Level
 {
     [CreateAssetMenu(
         fileName = "BackgroundMoveConfig",
@@ -9,8 +9,8 @@ namespace ShootEmUp
     )]
     public class BackgroundMoveConfig: ScriptableObject
     {
-        [FormerlySerializedAs("m_startPositionY")] [SerializeField] public float startPositionY;
-        [FormerlySerializedAs("m_endPositionY")] [SerializeField] public float endPositionY;
-        [FormerlySerializedAs("m_movingSpeedY")] [SerializeField] public float movingSpeedY;
+        [SerializeField] public float startPositionY;
+        [SerializeField] public float endPositionY;
+        [SerializeField] public float movingSpeedY;
     }
 }

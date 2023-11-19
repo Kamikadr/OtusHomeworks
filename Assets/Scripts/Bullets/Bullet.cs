@@ -5,40 +5,39 @@ namespace ShootEmUp
 {
     public sealed class Bullet : MonoBehaviour
     {
+        [SerializeField] private new Rigidbody2D rigidbody2D;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        private BulletArgs _bulletData;
+        
+        public bool IsPlayer { get; private set; }
+        public int Damage { get; private set; }
         public event Action<Bullet, Collision2D> OnCollisionEntered;
-
-        [NonSerialized] public bool isPlayer;
-        [NonSerialized] public int damage;
-
-        [SerializeField]
-        private new Rigidbody2D rigidbody2D;
-
-        [SerializeField]
-        private SpriteRenderer spriteRenderer;
+        
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            this.OnCollisionEntered?.Invoke(this, collision);
+            OnCollisionEntered?.Invoke(this, collision);
+        }
+        public void SetBulletArgs(BulletArgs bulletData)
+        {
+            _bulletData = bulletData;
+            
+            rigidbody2D.velocity = _bulletData.Velocity;
+            gameObject.layer = _bulletData.PhysicsLayer;
+            transform.position = _bulletData.Position;
+            spriteRenderer.color = _bulletData.Color;
+            Damage = _bulletData.Damage;
+            IsPlayer = _bulletData.IsPlayer;
         }
 
-        public void SetVelocity(Vector2 velocity)
+        public void SetParent(Transform parent)
         {
-            this.rigidbody2D.velocity = velocity;
+            transform.SetParent(parent);
         }
 
-        public void SetPhysicsLayer(int physicsLayer)
+        public Vector3 GetPosition()
         {
-            this.gameObject.layer = physicsLayer;
-        }
-
-        public void SetPosition(Vector3 position)
-        {
-            this.transform.position = position;
-        }
-
-        public void SetColor(Color color)
-        {
-            this.spriteRenderer.color = color;
+            return transform.position;
         }
     }
 }

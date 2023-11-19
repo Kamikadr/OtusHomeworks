@@ -6,53 +6,52 @@ namespace ShootEmUp
 {
     public sealed class EnemyManager : MonoBehaviour
     {
-        [SerializeField]
-        private EnemyPool _enemyPool;
-
-        [SerializeField]
-        private BulletSystem _bulletSystem;
+        [SerializeField] private int maxEnemyCount;
         
-        private readonly HashSet<GameObject> m_activeEnemies = new();
+        private readonly HashSet<GameObject> _activeEnemies = new();
+        
+        private EnemyBulletArgsFactory _bulletArgsFactory;
+        private EnemySpawner _enemySpawner;
+        private IBulletSystem _bulletSystem;
 
+        public void Initialize(IBulletSystem bulletSystem, EnemyBulletArgsFactory bulletArgsFactory, EnemySpawner enemySpawner)
+        {
+            _bulletSystem = bulletSystem;
+            _bulletArgsFactory = bulletArgsFactory;
+            _enemySpawner = enemySpawner;
+        }
         private IEnumerator Start()
         {
             while (true)
             {
                 yield return new WaitForSeconds(1);
-                var enemy = this._enemyPool.SpawnEnemy();
-                if (enemy != null)
+                if (_activeEnemies.Count < maxEnemyCount)
                 {
-                    if (this.m_activeEnemies.Add(enemy))
+                    var enemy = _enemySpawner.SpawnEnemy();
+                    if (_activeEnemies.Add(enemy.gameObject))
                     {
-                        enemy.GetComponent<HitPointsComponent>().hpEmpty += this.OnDestroyed;
-                        enemy.GetComponent<EnemyAttackAgent>().OnFire += this.OnFire;
-                    }    
+                        enemy.hitPointsComponent.HpIsEmptyEvent += OnDestroyed;
+                        enemy.enemyAttackAgent.OnFire += OnFire;
+                    }
                 }
             }
         }
 
-        private void OnDestroyed(GameObject enemy)
+        private void OnDestroyed(GameObject enemyGameObject)
         {
-            if (m_activeEnemies.Remove(enemy))
+            if (_activeEnemies.Remove(enemyGameObject))
             {
-                enemy.GetComponent<HitPointsComponent>().hpEmpty -= this.OnDestroyed;
-                enemy.GetComponent<EnemyAttackAgent>().OnFire -= this.OnFire;
-
-                _enemyPool.UnspawnEnemy(enemy);
+                var enemy = enemyGameObject.GetComponent<Enemy>();
+                enemy.hitPointsComponent.HpIsEmptyEvent -= OnDestroyed;
+                enemy.enemyAttackAgent.OnFire -= OnFire;
+                _enemySpawner.UnspawnEnemy(enemy);
             }
         }
 
         private void OnFire(GameObject enemy, Vector2 position, Vector2 direction)
         {
-            _bulletSystem.FlyBulletByArgs(new BulletSystem.Args
-            {
-                isPlayer = false,
-                physicsLayer = (int) PhysicsLayer.ENEMY,
-                color = Color.red,
-                damage = 1,
-                position = position,
-                velocity = direction * 2.0f
-            });
+            var bulletArgs = _bulletArgsFactory.Create(position, direction);
+            _bulletSystem.FlyBulletByArgs(bulletArgs);
         }
     }
 }

@@ -1,56 +1,39 @@
+using System;
+using ShootEmUp;
 using UnityEngine;
 
 namespace ShootEmUp
 {
     public sealed class EnemyAttackAgent : MonoBehaviour
     {
-        public delegate void FireHandler(GameObject enemy, Vector2 position, Vector2 direction);
-
-        public event FireHandler OnFire;
-
-        [SerializeField] private WeaponComponent weaponComponent;
-        [SerializeField] private EnemyMoveAgent moveAgent;
-        [SerializeField] private float countdown;
-
-        private GameObject target;
-        private float currentTime;
-
+        [SerializeField] private CooldownCounter cooldownCounter;
+        [SerializeField] private Attacker attacker;
+        
+        public event Action<GameObject, Vector2, Vector2> OnFire;
+        
+        private void OnEnable()
+        {
+            cooldownCounter.CountIsDownEvent += Fire;
+        }
+        public void SetActive(bool value)
+        {
+            cooldownCounter.SetActive(value);
+        }
         public void SetTarget(GameObject target)
         {
-            this.target = target;
+            attacker.SetTarget(target);
         }
-
-        public void Reset()
-        {
-            this.currentTime = this.countdown;
-        }
-
-        private void FixedUpdate()
-        {
-            if (!this.moveAgent.IsReached)
-            {
-                return;
-            }
-            
-            if (!this.target.GetComponent<HitPointsComponent>().IsHitPointsExists())
-            {
-                return;
-            }
-
-            this.currentTime -= Time.fixedDeltaTime;
-            if (this.currentTime <= 0)
-            {
-                this.Fire();
-                this.currentTime += this.countdown;
-            }
-        }
-
         private void Fire()
         {
-            var startPosition = this.weaponComponent.Position;
-            var vector = (Vector2) this.target.transform.position - startPosition;
-            var direction = vector.normalized;
-            this.OnFire?.Invoke(this.gameObject, startPosition, direction);
+            if (attacker.TryGetFireData(out var fireData))
+            {
+                OnFire?.Invoke(fireData.sender, fireData.position, fireData.direction);
+            }
+        }
+
+        private void OnDisable()
+        {
+            cooldownCounter.CountIsDownEvent -= Fire;
         }
     }
 }

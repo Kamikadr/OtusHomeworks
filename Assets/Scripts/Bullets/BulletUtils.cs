@@ -6,20 +6,17 @@ namespace ShootEmUp
     {
         internal static void DealDamage(Bullet bullet, GameObject other)
         {
-            if (!other.TryGetComponent(out TeamComponent team))
+            if (!other.TryGetComponent(out Unit unit))
             {
                 return;
             }
 
-            if (bullet.isPlayer == team.IsPlayer)
+            if (bullet.IsPlayer == unit.teamComponent.IsPlayer)
             {
                 return;
             }
-
-            if (other.TryGetComponent(out HitPointsComponent hitPoints))
-            {
-                hitPoints.TakeDamage(bullet.damage);
-            }
+            
+            unit.hitPointsComponent.TakeDamage(bullet.Damage);
         }
     }
 }

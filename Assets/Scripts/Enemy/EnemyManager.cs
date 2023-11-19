@@ -13,6 +13,7 @@ namespace ShootEmUp
         private EnemyBulletArgsFactory _bulletArgsFactory;
         private EnemySpawner _enemySpawner;
         private IBulletSystem _bulletSystem;
+        private bool _isNeedSpawningEnemies;
 
         public void Initialize(IBulletSystem bulletSystem, EnemyBulletArgsFactory bulletArgsFactory, EnemySpawner enemySpawner)
         {
@@ -20,9 +21,15 @@ namespace ShootEmUp
             _bulletArgsFactory = bulletArgsFactory;
             _enemySpawner = enemySpawner;
         }
-        private IEnumerator Start()
+        private void Start()
         {
-            while (true)
+            _isNeedSpawningEnemies = true;
+            StartCoroutine(StartAddingEnemies());
+        }
+
+        private IEnumerator StartAddingEnemies()
+        {
+            while (_isNeedSpawningEnemies)
             {
                 yield return new WaitForSeconds(1);
                 if (_activeEnemies.Count < maxEnemyCount)

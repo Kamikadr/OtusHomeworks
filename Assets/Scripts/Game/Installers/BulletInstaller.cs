@@ -5,6 +5,7 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game.Installers
 {
+    [DefaultExecutionOrder(-1)]
     public class BulletInstaller: MonoBehaviour
     {
         [SerializeField] private BulletSpawnManager bulletSpawnManager;

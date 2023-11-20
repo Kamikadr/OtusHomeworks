@@ -7,6 +7,7 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game.Installers
 {
+    [DefaultExecutionOrder(-1)]
     public class EnemyInstaller: MonoBehaviour
     {
         [SerializeField] private BulletFacade bulletSystem;

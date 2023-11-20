@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game.Installers
 {
+    [DefaultExecutionOrder(-1)]
     public class CharacterInstaller: MonoBehaviour
     {
         [SerializeField] private Character character;

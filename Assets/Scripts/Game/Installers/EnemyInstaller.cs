@@ -3,12 +3,13 @@ using ShootEmUp.Characters;
 using ShootEmUp.Common;
 using ShootEmUp.Enemies;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game.Installers
 {
     public class EnemyInstaller: MonoBehaviour
     {
-        [SerializeField] private BulletSystem bulletSystem;
+        [SerializeField] private BulletFacade bulletSystem;
         [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private BulletConfig bulletConfig;
         [SerializeField] private EnemySpawner enemySpawner;

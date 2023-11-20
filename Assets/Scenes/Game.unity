@@ -225,7 +225,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 363245576}
+  - component: {fileID: 363245579}
   - component: {fileID: 363245577}
+  - component: {fileID: 363245578}
   m_Layer: 0
   m_Name: BulletSystem
   m_TagString: Untagged
@@ -262,8 +264,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   worldTransform: {fileID: 1683128698}
-  levelBounds: {fileID: 2572952653776768186}
   initialBulletCount: 50
+--- !u!114 &363245578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363245575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae81824ebd064be698f77952bf78653e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelBounds: {fileID: 2572952653776768186}
+--- !u!114 &363245579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 363245575}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40ee98503b004d6383678df6f93f26b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletSpawnManager: {fileID: 363245577}
+  bulletLifecycleController: {fileID: 363245578}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +529,7 @@ MonoBehaviour:
   characterDeathObserver: {fileID: 634683393}
   characterActionController: {fileID: 1879759790}
   keyboardInput: {fileID: 1134805361}
-  bulletSystem: {fileID: 363245577}
+  bulletSystem: {fileID: 363245579}
   gameManager: {fileID: 3951702117947426123}
   bulletConfig: {fileID: 11400000, guid: 7138ae5d32d814e0ca50c616c65ea105, type: 2}
 --- !u!1 &883274639
@@ -952,7 +980,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f8f908dc5e4da2a3aa6e4c3fe39886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSystem: {fileID: 363245577}
+  bulletSystem: {fileID: 363245579}
   enemyManager: {fileID: 562298205}
   bulletConfig: {fileID: 11400000, guid: cbbc85c21a6b3254f954163b85d36adb, type: 2}
   enemySpawner: {fileID: 562298207}
@@ -1005,7 +1033,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a644036df49f41879a96f4c53dfabb06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSystem: {fileID: 363245577}
+  bulletSpawnManager: {fileID: 363245577}
   bulletPrefab: {fileID: 201757604187811891, guid: 5fe72886874b4e445b06cf777ca4920d,
     type: 3}
   bulletPoolTransform: {fileID: 1831741369}

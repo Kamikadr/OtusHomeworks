@@ -6,9 +6,9 @@ namespace ShootEmUp.Enemies
     public class EnemyFactory : Factory<Enemy>
     {
         private readonly ICharacter _character;
-        private readonly EnemyPositions _enemyPositions;
+        private readonly IEnemyPositionGetter _enemyPositions;
 
-        public EnemyFactory(Enemy prefabItem, ICharacter character, EnemyPositions enemyPositions) : base(prefabItem)
+        public EnemyFactory(Enemy prefabItem, ICharacter character, IEnemyPositionGetter enemyPositions) : base(prefabItem)
         {
             _character = character;
             _enemyPositions = enemyPositions;

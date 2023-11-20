@@ -2,6 +2,7 @@
 using ShootEmUp.Characters;
 using ShootEmUp.GameInput;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game.Installers
 {
@@ -11,7 +12,7 @@ namespace ShootEmUp.Game.Installers
         [SerializeField] private CharacterDeathObserver characterDeathObserver;
         [SerializeField] private CharacterActionController characterActionController;
         [SerializeField] private KeyboardInput keyboardInput;
-        [SerializeField] private BulletSystem bulletSystem;
+        [SerializeField] private BulletFacade bulletSystem;
         [SerializeField] private GameManager gameManager;
         [SerializeField] private BulletConfig bulletConfig;
 

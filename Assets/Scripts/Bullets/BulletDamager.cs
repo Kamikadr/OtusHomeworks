@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace ShootEmUp.Bullets
 {
-    internal static class BulletUtils
+    internal class BulletDamager
     {
-        internal static void DealDamage(Bullet bullet, GameObject other)
+        public void DealDamage(Bullet bullet, GameObject other)
         {
             if (!other.TryGetComponent(out Unit unit))
             {

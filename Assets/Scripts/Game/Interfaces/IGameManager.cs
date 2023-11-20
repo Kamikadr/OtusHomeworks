@@ -1,4 +1,4 @@
-﻿namespace ShootEmUp.Game
+﻿namespace ShootEmUp.Game.Interfaces
 {
     public interface IGameManager
     {

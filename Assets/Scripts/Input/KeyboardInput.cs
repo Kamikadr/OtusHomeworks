@@ -1,14 +1,15 @@
 using System;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp.GameInput
 {
-    public sealed class KeyboardInput : MonoBehaviour, IFireInput, IMoveInput
+    public sealed class KeyboardInput : MonoBehaviour, IFireInput, IMoveInput, IUpdateListener
     {
         public event Action OnFireEvent;
         public event Action<Vector2> OnMoveEvent;
 
-        private void Update()
+        public void OnUpdate()
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
@@ -31,5 +32,6 @@ namespace ShootEmUp.GameInput
 
             return Vector2.zero;
         }
+        
     }
 }

@@ -13,6 +13,10 @@ namespace ShootEmUp.Common
             var item = Instantiate(prefabItem, parent);
             return item;
         }
-        
+
+        protected virtual void OnCreate(T item)
+        {
+        }
+
     }
 }

@@ -1,3 +1,4 @@
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp.Enemies
@@ -7,7 +8,7 @@ namespace ShootEmUp.Enemies
         [SerializeField] private EnemyAttacker enemyAttacker;
         [SerializeField] private CooldownCounter cooldownCounter;
 
-        private void OnEnable()
+        private void Awake()
         {
             cooldownCounter.CountIsDownEvent += Fire;
         }
@@ -19,10 +20,10 @@ namespace ShootEmUp.Enemies
         {
             enemyAttacker.Fire();
         }
-        private void OnDisable()
+        private void OnDestroy()
         {
-            cooldownCounter.CountIsDownEvent += Fire;
+            cooldownCounter.CountIsDownEvent -= Fire;
         }
-
+        
     }
 }

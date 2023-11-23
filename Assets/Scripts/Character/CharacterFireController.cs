@@ -1,10 +1,11 @@
 ﻿using ShootEmUp.Bullets;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using ShootEmUp.GameInput;
 using UnityEngine;
 
 namespace ShootEmUp.Characters
 {
-    public class CharacterFireController: MonoBehaviour
+    public class CharacterFireController: MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private KeyboardInput fireInput;
         [SerializeField] private BulletSystem bulletSystem;
@@ -12,7 +13,7 @@ namespace ShootEmUp.Characters
         [SerializeField] private BulletConfig bulletConfig;
         
         
-        public void Start()
+        public void OnStart()
         {
             fireInput.OnFireEvent += Fire;
         }

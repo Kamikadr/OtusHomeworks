@@ -1,10 +1,11 @@
 using System;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ShootEmUp.Level
 {
-    public sealed class LevelBackground : MonoBehaviour
+    public sealed class LevelBackground : MonoBehaviour, IFixedUpdateListener
     {
         [SerializeField] private BackgroundMoveConfig backgroundMoveConfig;
         
@@ -26,7 +27,7 @@ namespace ShootEmUp.Level
             _positionZ = position.z;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
             if (_myTransform.position.y <= _endPositionY)
             {

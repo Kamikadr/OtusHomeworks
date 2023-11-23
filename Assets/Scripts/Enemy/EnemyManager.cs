@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using ShootEmUp.Bullets;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemyManager : MonoBehaviour
+    public sealed class EnemyManager : MonoBehaviour, IGameFinishListener
     {
         
         [SerializeField] private EnemySpawner enemySpawner;
@@ -38,5 +39,14 @@ namespace ShootEmUp.Enemies
         }
 
 
+        public void Finish()
+        {
+            foreach (var enemyObject in _activeEnemies)
+            {
+                var enemy = enemyObject.GetComponent<Enemy>();
+                enemySpawner.UnspawnEnemy(enemy);
+            }
+            _activeEnemies.Clear();
+        }
     }
 }

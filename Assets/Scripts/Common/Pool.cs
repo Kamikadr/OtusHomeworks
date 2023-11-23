@@ -9,37 +9,37 @@ namespace ShootEmUp.Common
         [SerializeField] private int defaultItemCount;
         [SerializeField] private Factory<T> itemFactory;
         [SerializeField] private Transform poolContainer;
-        private readonly Queue<T> _bulletPool = new();
+        private readonly Queue<T> _pool = new();
         
         private void Awake()
         {
-            for (var i = 0; i <= defaultItemCount; i++)
+            for (var i = 0; i < defaultItemCount; i++)
             {
                 var newBullet = itemFactory.Create(poolContainer);
-                _bulletPool.Enqueue(newBullet);
+                _pool.Enqueue(newBullet);
             }
         }
 
         public T Get()
         {
-            if (_bulletPool.TryDequeue(out var bullet))
+            if (_pool.TryDequeue(out var item))
             {
-                return bullet;
+                return item;
             }
 
             return itemFactory.Create(poolContainer);
         }
 
-        public void Release(T bullet)
+        public void Release(T item)
         {
-            if (_bulletPool.Count < defaultItemCount)
+            if (_pool.Count < defaultItemCount)
             {
-                bullet.transform.SetParent(poolContainer);
-                _bulletPool.Enqueue(bullet);
+                item.transform.SetParent(poolContainer);
+                _pool.Enqueue(item);
             }
             else
             {
-                Destroy(bullet);
+                Destroy(item);
             }
         }
     }

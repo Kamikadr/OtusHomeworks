@@ -2,6 +2,6 @@ namespace ShootEmUp.Game.Interfaces.GameCycle
 {
     public interface IGameStartListener: IGameListener
     {
-        void Start();
+        void OnStart();
     }
 }

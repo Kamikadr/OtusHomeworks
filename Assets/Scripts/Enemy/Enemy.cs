@@ -1,18 +1,20 @@
 ﻿using ShootEmUp.Common;
 using ShootEmUp.Componets;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
-    public class Enemy: MonoBehaviour
+    public class Enemy: MonoBehaviour, IGameFinishListener, IGamePauseListener, IGameResumeListener
     {
         [SerializeField] private EnemyAttackController enemyAttackController;
         [SerializeField] public EnemyAttacker enemyAttacker;
         [SerializeField] public EnemyMoveAgent enemyMoveAgent;
         [SerializeField] public HitPointsComponent hitPointsComponent;
+        private bool _isEnemyCanAttack;
 
-        private void OnEnable()
+        private void Awake()
         {
             enemyMoveAgent.IsReachedChange += OnReachedChange;
         }
@@ -29,12 +31,26 @@ namespace ShootEmUp.Enemies
 
         private void OnReachedChange(bool value)
         {
+            _isEnemyCanAttack = value;
             enemyAttackController.SetActive(value);
         }
+        
+        
 
-        private void OnDisable()
+        public void Finish()
         {
+            enemyAttackController.SetActive(false);
             enemyMoveAgent.IsReachedChange -= OnReachedChange;
+        }
+
+        public void Pause()
+        {
+            enemyAttackController.SetActive(false);
+        }
+
+        public void Resume()
+        {
+            enemyAttackController.SetActive(_isEnemyCanAttack);
         }
     }
 }

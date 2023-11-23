@@ -1,9 +1,10 @@
 ﻿using System;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CooldownCounter : MonoBehaviour
+    public class CooldownCounter : MonoBehaviour, IFixedUpdateListener
     {
         [SerializeField] private float countdown;
         private float _currentTime;
@@ -21,7 +22,7 @@ namespace ShootEmUp
             _currentTime = countdown;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
             if (!_needCount)
             {

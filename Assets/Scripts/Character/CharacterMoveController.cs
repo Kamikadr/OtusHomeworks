@@ -1,28 +1,27 @@
 using System;
 using ShootEmUp.Componets;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using ShootEmUp.GameInput;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp.Characters
 {
-    public class CharacterMoveController:MonoBehaviour
+    public class CharacterMoveController:MonoBehaviour, IGameStartListener, IGameFinishListener
     {
         [SerializeField] private KeyboardInput input;
         [SerializeField] private MoveComponent moveComponent;
-
-
-        private void OnEnable()
-        {
-            input.OnMoveEvent += MoveCharacter;
-        }
-
+        
         private void MoveCharacter(Vector2 destination)
         {
             moveComponent.Move(destination);
         }
 
-        private void OnDisable()
+        public void OnStart()
+        {
+            input.OnMoveEvent += MoveCharacter;
+        }
+
+        public void Finish()
         {
             input.OnMoveEvent -= MoveCharacter;
         }

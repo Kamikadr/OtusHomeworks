@@ -1,6 +1,7 @@
 using ShootEmUp.Bullets;
 using ShootEmUp.Characters;
 using ShootEmUp.Common;
+using ShootEmUp.Game;
 using UnityEngine;
 
 namespace ShootEmUp.Enemies
@@ -12,6 +13,7 @@ namespace ShootEmUp.Enemies
         [SerializeField] private Transform worldTransform;
         [SerializeField] private Pool<Enemy> enemyPool;
         [SerializeField] private EnemyPositions enemyPositions;
+        [SerializeField] private GameManager gameManager;
 
         public Enemy SpawnEnemy()
         {
@@ -25,13 +27,15 @@ namespace ShootEmUp.Enemies
             enemy.enemyAttacker.Construct(bulletSystem);
             enemy.enemyAttacker.SetTarget(character.gameObject);
             
+            gameManager.AddListeners(enemy.gameObject);
+            
             return enemy;
         }
 
         public void UnspawnEnemy(Enemy enemy)
         {
             enemyPool.Release(enemy);
-            enemy.enemyAttacker.Construct(bulletSystem);
+            gameManager.RemoveListeners(enemy.gameObject);
         }
     }
 }

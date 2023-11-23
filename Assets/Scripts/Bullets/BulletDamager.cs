@@ -1,23 +1,27 @@
 using ShootEmUp.Common;
+using ShootEmUp.Componets;
 using UnityEngine;
 
 namespace ShootEmUp.Bullets
 {
-    internal class BulletDamager
+    internal static class BulletDamager
     {
-        public void DealDamage(Bullet bullet, GameObject other)
+        public static void DealDamage(Bullet bullet, GameObject other)
         {
-            if (!other.TryGetComponent(out Unit unit))
+            if (!other.TryGetComponent(out HitPointsComponent hitPoints))
             {
                 return;
             }
-
-            if (bullet.IsPlayer == unit.teamComponent.IsPlayer)
+            if (!other.TryGetComponent(out TeamComponent teamComponent))
+            {
+                return;
+            }
+            if (bullet.IsPlayer == teamComponent.IsPlayer)
             {
                 return;
             }
             
-            unit.hitPointsComponent.TakeDamage(bullet.Damage);
+            hitPoints.TakeDamage(bullet.Damage);
         }
     }
 }

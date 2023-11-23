@@ -1,7 +1,7 @@
 ﻿using ShootEmUp.Componets;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Enemies
 {
     public class FireSetup: MonoBehaviour
     {
@@ -16,11 +16,10 @@ namespace ShootEmUp
             {
                 return false;
             }
-
-            fireData.sender = gameObject;
-            fireData.position = weaponComponent.Position;
-            var vector = (Vector2) _target.transform.position - fireData.position;
-            fireData.direction = vector.normalized;
+            
+            fireData.Position = weaponComponent.Position;
+            var vector = (Vector2) _target.transform.position - fireData.Position;
+            fireData.Direction = vector.normalized;
             return true;
         }
         
@@ -30,11 +29,5 @@ namespace ShootEmUp
             _targetHitPoint = _target.GetComponent<HitPointsComponent>();
         }
         
-        public struct FireData
-        {
-            public GameObject sender;
-            public Vector2 position;
-            public Vector2 direction;
-        }
     }
 }

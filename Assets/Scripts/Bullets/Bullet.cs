@@ -16,6 +16,7 @@ namespace ShootEmUp.Bullets
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
+            BulletDamager.DealDamage(this, collision.gameObject);
             OnCollisionEntered?.Invoke(this, collision);
         }
         public void SetBulletArgs(BulletArgs bulletData)

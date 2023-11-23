@@ -6,7 +6,7 @@ namespace ShootEmUp.GameInput
     public sealed class KeyboardInput : MonoBehaviour, IFireInput, IMoveInput
     {
         public event Action OnFireEvent;
-        public event Action<MoveDirection> OnMoveEvent;
+        public event Action<Vector2> OnMoveEvent;
 
         private void Update()
         {
@@ -15,14 +15,21 @@ namespace ShootEmUp.GameInput
                 OnFireEvent?.Invoke();
             }
 
+            OnMoveEvent?.Invoke(GetDestination());
+        }
+
+        private Vector2 GetDestination()
+        {
             if (Input.GetKey(KeyCode.LeftArrow))
             {
-                OnMoveEvent?.Invoke(MoveDirection.Left);
+                return Vector2.left;
             }
-            else if (Input.GetKey(KeyCode.RightArrow))
+            if (Input.GetKey(KeyCode.RightArrow))
             {
-                OnMoveEvent?.Invoke(MoveDirection.Right);
+                return Vector2.right;
             }
+
+            return Vector2.zero;
         }
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace ShootEmUp.Game
 {
-    public sealed class GameManager : MonoBehaviour, IGameManager
+    public sealed class GameManager : MonoBehaviour
     {
         public void FinishGame()
         {
@@ -13,7 +13,7 @@ namespace ShootEmUp.Game
         public void StartGame()
         {
             Debug.Log("Game start!");
-            Time.timeScale = 0;
+            Time.timeScale = 1;
         }
     }
 }

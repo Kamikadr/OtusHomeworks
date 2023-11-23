@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using ShootEmUp.Level;
 using UnityEngine;
@@ -8,11 +7,10 @@ namespace ShootEmUp.Bullets
     public class BulletLifecycleController: MonoBehaviour
     {
         [SerializeField] private LevelBounds levelBounds;
+        [SerializeField] private BulletSpawnManager bulletSpawnManager;
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
-
-        public event Action<Bullet> OnBulletLifecycleEnd;
-        public event Action<Bullet, Collision2D> OnBulletCollide;
+        
 
         public void AddBullet(Bullet bullet)
         {
@@ -41,15 +39,13 @@ namespace ShootEmUp.Bullets
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
-                OnBulletLifecycleEnd?.Invoke(bullet);
+                bulletSpawnManager.RemoveBullet(bullet);
             }
         }
         
         private void OnBulletCollision(Bullet bullet, Collision2D collision)
         {
-            OnBulletCollide?.Invoke(bullet, collision);
             RemoveBullet(bullet);
         }
-        
     }
 }

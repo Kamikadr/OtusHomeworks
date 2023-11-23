@@ -1,9 +1,10 @@
 using System;
+using UnityEngine;
 
 namespace ShootEmUp.GameInput
 {
     public interface IMoveInput
     {
-        event Action<MoveDirection> OnMoveEvent;
+        event Action<Vector2> OnMoveEvent;
     }
 }

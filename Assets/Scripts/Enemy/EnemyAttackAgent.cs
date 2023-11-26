@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemyAttacker : MonoBehaviour
+    public sealed class EnemyAttackAgent : MonoBehaviour
     {
         [SerializeField] private FireSetup fireSetup;
         [SerializeField] private BulletConfig bulletConfig;

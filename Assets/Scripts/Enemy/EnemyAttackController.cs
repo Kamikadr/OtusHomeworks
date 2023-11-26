@@ -1,11 +1,12 @@
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
     public class EnemyAttackController: MonoBehaviour
     {
-        [SerializeField] private EnemyAttacker enemyAttacker;
+        [SerializeField] private EnemyAttackAgent enemyAttackAgent;
         [SerializeField] private CooldownCounter cooldownCounter;
 
         private void Awake()
@@ -18,7 +19,7 @@ namespace ShootEmUp.Enemies
         }
         private void Fire()
         {
-            enemyAttacker.Fire();
+            enemyAttackAgent.Fire();
         }
         private void OnDestroy()
         {

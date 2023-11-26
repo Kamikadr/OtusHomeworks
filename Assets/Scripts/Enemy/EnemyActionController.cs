@@ -7,19 +7,40 @@ namespace ShootEmUp.Enemies
         [SerializeField] private EnemyAttackController enemyAttackController;
         [SerializeField] public EnemyMoveAgent enemyMoveAgent;
         
-        private void OnEnable()
+        private bool _isActive;
+        private bool _isEnemyCanAttack;
+        public void OnStart()
         {
+            if (_isActive)
+            {
+                return;
+            }
+            
             enemyMoveAgent.IsReachedChange += OnReachedChange;
+            enemyAttackController.SetActive(_isEnemyCanAttack);
+            _isActive = true;
         }
         
         private void OnReachedChange(bool value)
         {
             enemyAttackController.SetActive(value);
+            _isEnemyCanAttack = value;
         }
 
-        private void OnDisable()
+        public void OnStop()
         {
+            if (!_isActive)
+            {
+                return;
+            }
             enemyMoveAgent.IsReachedChange -= OnReachedChange;
+            enemyAttackController.SetActive(false);
+            _isActive = false;
+        }
+
+        public void Refresh()
+        {
+            _isEnemyCanAttack = false;
         }
     }
 }

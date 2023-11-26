@@ -57,7 +57,6 @@ namespace ShootEmUp.Game
                 }
             }
         }
-
         public void RemoveListeners(GameObject obj)
         {
             var listeners = obj.GetComponentsInChildren<IGameListener>(true);
@@ -98,16 +97,6 @@ namespace ShootEmUp.Game
 
 
 
-        public void FinishGame()
-        {
-            for (var i = 0; i < _gameFixedUpdateListeners.Count; i++)
-            {
-                _gameFinishListeners[i].Finish();
-            }
-            
-            Debug.Log("Game over!");
-            Time.timeScale = 0;
-        }
         public void StartGame()
         {
             for (var i = 0; i < _gameStartListeners.Count; i++)
@@ -119,9 +108,19 @@ namespace ShootEmUp.Game
             Time.timeScale = 1;
             _needUpdate = true;
         }
+        public void FinishGame()
+        {
+            for (var i = 0; i < _gameFinishListeners.Count; i++)
+            {
+                _gameFinishListeners[i].Finish();
+            }
+            
+            Debug.Log("Game over!");
+            Time.timeScale = 0;
+        }
         public void PauseGame()
         {
-            for (var i = 0; i < _gameFixedUpdateListeners.Count; i++)
+            for (var i = 0; i < _gamePauseListeners.Count; i++)
             {
                 _gamePauseListeners[i].Pause();
             }
@@ -130,7 +129,7 @@ namespace ShootEmUp.Game
         }
         public void ResumeGame()
         {
-            for (var i = 0; i < _gameFixedUpdateListeners.Count; i++)
+            for (var i = 0; i < _gameResumeListeners.Count; i++)
             {
                 _gameResumeListeners[i].Resume();
             }

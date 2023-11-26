@@ -9,14 +9,14 @@ namespace ShootEmUp.Enemies
         [SerializeField] private BulletConfig bulletConfig;
         private BulletSystem _bulletSystem;
         
-        public void SetTarget(GameObject target)
-        {
-            fireSetup.SetTarget(target);
-        }
-
         public void Construct(BulletSystem bulletSystem)
         {
             _bulletSystem = bulletSystem;
+        }
+        
+        public void SetTarget(GameObject target)
+        {
+            fireSetup.SetTarget(target);
         }
         public void Fire()
         {

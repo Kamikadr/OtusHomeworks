@@ -5,14 +5,22 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class EnemyCountdownSpawner: MonoBehaviour, IGameStartListener, IGameFinishListener, IGamePauseListener, IGameResumeListener
+    public class EnemyCountdownSpawner: MonoBehaviour,
+        IGameStartListener,
+        IGameFinishListener,
+        IGamePauseListener,
+        IGameResumeListener
     {
         [SerializeField] private EnemyManager enemyManager;
         [SerializeField] private float countdownInSeconds;
         private bool _isNeedSpawningEnemies;
         private Coroutine _currentCoroutine;
 
-
+        public void OnStart()
+        {
+            StartSpawning();
+        }
+        
         private void StartSpawning()
         {
             _isNeedSpawningEnemies = true;
@@ -33,12 +41,7 @@ namespace ShootEmUp.Enemies
             StopCoroutine(_currentCoroutine);
             _isNeedSpawningEnemies = false;
         }
-
-        public void OnStart()
-        {
-            StartSpawning();
-        }
-
+        
         public void Finish()
         {
             StopSpawning();

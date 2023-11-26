@@ -1,11 +1,12 @@
 using System;
 using ShootEmUp.Componets;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : MonoBehaviour
+    public sealed class EnemyMoveAgent : MonoBehaviour, IFixedUpdateListener
     {
         [SerializeField] private MoveComponent moveComponent;
         [SerializeField] private float moveThreshold = 0.25f;
@@ -21,7 +22,7 @@ namespace ShootEmUp
             IsReachedChange?.Invoke(_isReached);
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate()
         {
             if (_isReached)
             {

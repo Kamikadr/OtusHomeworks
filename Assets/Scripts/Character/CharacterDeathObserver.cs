@@ -5,7 +5,11 @@ using UnityEngine;
 
 namespace ShootEmUp.Characters
 {
-    public class CharacterDeathObserver: MonoBehaviour, IGameStartListener, IGameFinishListener, IGamePauseListener, IGameResumeListener
+    public class CharacterDeathObserver: MonoBehaviour,
+        IGameStartListener,
+        IGameFinishListener,
+        IGamePauseListener,
+        IGameResumeListener
     {
         [SerializeField] private HitPointsComponent hitPointsComponent;
         [SerializeField] private GameManager gameManager;

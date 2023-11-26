@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabItem: {fileID: 1879300954511568051, guid: 87fe189881a524806800482ac8eaaa83,
     type: 3}
-  gameManager: {fileID: 0}
+  gameManager: {fileID: 1430414576}
 --- !u!114 &189237374
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   worldTransform: {fileID: 1683128698}
   enemyPool: {fileID: 189237374}
   enemyPositions: {fileID: 7166351703523243261}
-  gameManager: {fileID: 3951702117947426123}
+  gameManager: {fileID: 1430414576}
 --- !u!114 &562298208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitPointsComponent: {fileID: 4414282821800802400}
-  gameManager: {fileID: 3951702117947426123}
+  gameManager: {fileID: 1430414576}
 --- !u!1 &654476493
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,6 +1303,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1430414575}
   - component: {fileID: 1430414574}
+  - component: {fileID: 1430414576}
   m_Layer: 0
   m_Name: App
   m_TagString: Untagged
@@ -1322,7 +1323,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b756eb0c10c44f3dada35194b1d8fa21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameStartController: {fileID: 3951702117947426125}
+  gameState: 0
+  gameLifecycleMediator: {fileID: 3951702117947426127}
   startButton: {fileID: 2026988812}
   pauseButton: {fileID: 890665317}
 --- !u!4 &1430414575
@@ -1347,6 +1349,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1430414576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1430414573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697fe7ba192e484db495320b9c01bcd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1536551910
 GameObject:
   m_ObjectHideFlags: 0
@@ -2205,7 +2219,7 @@ PrefabInstance:
     - target: {fileID: 3926786964091724599, guid: 9699e7e809fd44b2bbf3d30c951ecbd2,
         type: 3}
       propertyPath: hitPoints
-      value: 500
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9699e7e809fd44b2bbf3d30c951ecbd2, type: 3}
@@ -2230,10 +2244,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3951702117947426122}
-  - component: {fileID: 3951702117947426125}
-  - component: {fileID: 3951702117947426123}
   - component: {fileID: 3951702117947426124}
   - component: {fileID: 3951702117947426126}
+  - component: {fileID: 3951702117947426127}
   m_Layer: 0
   m_Name: '[GAME_SYSTEM]'
   m_TagString: Untagged
@@ -2260,18 +2273,6 @@ Transform:
   m_Father: {fileID: 1430414575}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3951702117947426123
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3951702117947426121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 697fe7ba192e484db495320b9c01bcd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &3951702117947426124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2286,20 +2287,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   countdown: 3
   tick: 1
---- !u!114 &3951702117947426125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3951702117947426121}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d55ba283601d466595934f581e0c490c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gameManager: {fileID: 3951702117947426123}
-  startTimer: {fileID: 3951702117947426124}
 --- !u!114 &3951702117947426126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,6 +2299,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3560ef7c3ff4324b1fa253d3e1ff3b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startTimer: {fileID: 3951702117947426124}
+--- !u!114 &3951702117947426127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3951702117947426121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55ba283601d466595934f581e0c490c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameManager: {fileID: 1430414576}
   startTimer: {fileID: 3951702117947426124}
 --- !u!212 &4162873433806880330
 SpriteRenderer:

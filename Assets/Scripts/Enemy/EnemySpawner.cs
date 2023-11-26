@@ -22,8 +22,8 @@ namespace ShootEmUp.Enemies
             enemy.SetParent(worldTransform);
             enemy.SetPosition(spawnPosition.position);
             enemy.enemyMoveAgent.SetDestination(attackPosition.position);
-            enemy.enemyAttacker.Construct(bulletSystem);
-            enemy.enemyAttacker.SetTarget(character.gameObject);
+            enemy.enemyAttackAgent.Construct(bulletSystem);
+            enemy.enemyAttackAgent.SetTarget(character.gameObject);
             
             return enemy;
         }
@@ -31,7 +31,7 @@ namespace ShootEmUp.Enemies
         public void UnspawnEnemy(Enemy enemy)
         {
             enemyPool.Release(enemy);
-            enemy.enemyAttacker.Construct(bulletSystem);
+            enemy.enemyAttackAgent.Construct(bulletSystem);
         }
     }
 }

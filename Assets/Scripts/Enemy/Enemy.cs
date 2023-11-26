@@ -1,5 +1,4 @@
-﻿using ShootEmUp.Common;
-using ShootEmUp.Componets;
+﻿using ShootEmUp.Componets;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -8,14 +7,9 @@ namespace ShootEmUp.Enemies
     public class Enemy: MonoBehaviour
     {
         [SerializeField] private EnemyAttackController enemyAttackController;
-        [SerializeField] public EnemyAttacker enemyAttacker;
+        [SerializeField] public EnemyAttackAgent enemyAttackAgent;
         [SerializeField] public EnemyMoveAgent enemyMoveAgent;
         [SerializeField] public HitPointsComponent hitPointsComponent;
-
-        private void OnEnable()
-        {
-            enemyMoveAgent.IsReachedChange += OnReachedChange;
-        }
         
         public void SetPosition(Vector2 position)
         {
@@ -27,14 +21,5 @@ namespace ShootEmUp.Enemies
             transform.parent = parent;
         }
 
-        private void OnReachedChange(bool value)
-        {
-            enemyAttackController.SetActive(value);
-        }
-
-        private void OnDisable()
-        {
-            enemyMoveAgent.IsReachedChange -= OnReachedChange;
-        }
     }
 }

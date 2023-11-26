@@ -39,7 +39,7 @@ namespace ShootEmUp.Common
             }
             else
             {
-                Destroy(item);
+                Destroy(item.gameObject);
             }
         }
     }

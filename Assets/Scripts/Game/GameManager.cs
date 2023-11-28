@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp.Game
 {
+    [DefaultExecutionOrder(-1)]
     public sealed class GameManager : MonoBehaviour
     {
         private readonly List<IGameStartListener> _gameStartListeners = new();
@@ -14,7 +14,7 @@ namespace ShootEmUp.Game
         private readonly List<IUpdateListener> _gameUpdateListeners = new();
         private readonly List<IFixedUpdateListener> _gameFixedUpdateListeners = new();
 
-        private bool _needUpdate = false;
+        private bool _needUpdate;
 
         private void Awake()
         {

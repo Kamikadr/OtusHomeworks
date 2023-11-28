@@ -37,12 +37,14 @@ namespace ShootEmUp.Level
                     _positionZ
                 );
             }
-
-            _myTransform.position -= new Vector3(
-                _positionX,
-                _movingSpeedY * Time.fixedDeltaTime,
-                _positionZ
-            );
+            else
+            {
+                _myTransform.position -= new Vector3(
+                    _positionX,
+                    _movingSpeedY * Time.fixedDeltaTime,
+                    _positionZ
+                );
+            }
         }
 
         

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class Enemy: MonoBehaviour,IGameStartListener, IGameFinishListener, IGamePauseListener, IGameResumeListener
+    public class Enemy: MonoBehaviour, IGamePauseListener, IGameResumeListener
     {
         [SerializeField] private EnemyAttackController enemyAttackController;
         [SerializeField] private EnemyActionController enemyActionController;
@@ -13,11 +13,11 @@ namespace ShootEmUp.Enemies
         [SerializeField] public HitPointsComponent hitPointsComponent;
 
 
-        public void OnStart()
+        public void Activate()
         {
             enemyActionController.OnStart();
+            hitPointsComponent.Refresh();
         }
-
         public void SetPosition(Vector2 position)
         {
             transform.position = position;
@@ -28,6 +28,7 @@ namespace ShootEmUp.Enemies
             transform.parent = parent;
         }
         
+        
         public void Pause()
         {
             enemyActionController.OnStop();
@@ -36,12 +37,10 @@ namespace ShootEmUp.Enemies
         {
             enemyActionController.OnStart();
         }
-        public void Finish()
+        public void Deactivate()
         {
             enemyActionController.OnStop();
             enemyActionController.Refresh();
         }
-
-        
     }
 }

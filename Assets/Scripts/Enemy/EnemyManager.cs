@@ -34,7 +34,7 @@ namespace ShootEmUp.Enemies
             {
                 var enemy = enemyGameObject.GetComponent<Enemy>();
                 enemy.hitPointsComponent.HpIsEmptyEvent -= OnDestroyed;
-                enemySpawner.UnspawnEnemy(enemy);
+                enemySpawner.DespawnEnemy(enemy);
             }
         }
 
@@ -44,7 +44,7 @@ namespace ShootEmUp.Enemies
             foreach (var enemyObject in _activeEnemies)
             {
                 var enemy = enemyObject.GetComponent<Enemy>();
-                enemySpawner.UnspawnEnemy(enemy);
+                enemySpawner.DespawnEnemy(enemy);
             }
             _activeEnemies.Clear();
         }

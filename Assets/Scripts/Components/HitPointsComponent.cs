@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp.Componets
 {
-    public sealed class HitPointsComponent : MonoBehaviour, IGameStartListener
+    public sealed class HitPointsComponent : MonoBehaviour
     {
         [SerializeField] private int hitPoints;
         private int _hitPoint;
@@ -22,8 +22,7 @@ namespace ShootEmUp.Componets
                 HpIsEmptyEvent?.Invoke(gameObject);
             }
         }
-
-        public void OnStart()
+        public void Refresh()
         {
             _hitPoint = hitPoints;
         }

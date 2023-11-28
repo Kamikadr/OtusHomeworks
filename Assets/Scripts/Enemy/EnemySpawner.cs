@@ -26,13 +26,15 @@ namespace ShootEmUp.Enemies
             enemy.enemyMoveAgent.SetDestination(attackPosition.position);
             enemy.enemyAttackAgent.Construct(bulletSystem);
             enemy.enemyAttackAgent.SetTarget(character.gameObject);
+            enemy.Activate();
             
             gameManager.AddListeners(enemy.gameObject);
             return enemy;
         }
 
-        public void UnspawnEnemy(Enemy enemy)
+        public void DespawnEnemy(Enemy enemy)
         {
+            enemy.Deactivate();
             enemyPool.Release(enemy);
             gameManager.RemoveListeners(enemy.gameObject);
         }

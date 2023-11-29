@@ -42,17 +42,17 @@ namespace ShootEmUp.Enemies
             _isNeedSpawningEnemies = false;
         }
         
-        public void Finish()
+        public void OnFinish()
         {
             StopSpawning();
         }
 
-        public void Pause()
+        public void OnPause()
         {
             StopSpawning();
         }
 
-        public void Resume()
+        public void OnResume()
         {
             StartSpawning();
         }

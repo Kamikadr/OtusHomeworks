@@ -33,7 +33,7 @@ namespace ShootEmUp.Characters
         }
   
         
-        public void Finish()
+        public void OnFinish()
         {
             fireInput.OnFireEvent -= Fire;
         }

@@ -1,8 +1,9 @@
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp.Componets
 {
-    public sealed class MoveRigidbodyComponent : MoveComponent
+    public sealed class MoveRigidbodyComponent : MoveComponent, IFixedUpdateListener
     {
         [SerializeField] private new Rigidbody2D rigidbody2D;
         [SerializeField] private float speed = 5.0f;
@@ -13,9 +14,9 @@ namespace ShootEmUp.Componets
             _destination = vector;
         }
 
-        private void FixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
-            var nextPosition = rigidbody2D.position + _destination * (speed * Time.deltaTime);
+            var nextPosition = rigidbody2D.position + _destination * (speed * deltaTime);
             rigidbody2D.MovePosition(nextPosition);
         }
     }

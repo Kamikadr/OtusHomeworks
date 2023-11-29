@@ -20,7 +20,7 @@ namespace ShootEmUp.Bullets
                 bullet.OnCollisionEntered += OnBulletCollision;
             }
         }
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             _cache.Clear();
             _cache.AddRange(_activeBullets);
@@ -49,7 +49,7 @@ namespace ShootEmUp.Bullets
             RemoveBullet(bullet);
         }
 
-        public void Finish()
+        public void OnFinish()
         {
             foreach (var bullet in _activeBullets)
             {

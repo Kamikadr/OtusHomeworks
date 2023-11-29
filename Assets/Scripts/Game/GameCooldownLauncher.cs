@@ -1,18 +1,19 @@
 using System;
+using ShootEmUp.Common;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game
 {
-    public class GameLifecycleMediator: MonoBehaviour
+    public class GameCooldownLauncher: MonoBehaviour
     {
         [SerializeField] private GameManager gameManager;
-        [SerializeField] private StartTimer startTimer;
+        [FormerlySerializedAs("startTimer")] [SerializeField] private Timer timer;
         
         public void StartGame()
         {
-            startTimer.OnTimerIsOver += RunGame;
-            startTimer.StartCountdown();
+            timer.OnTimerIsOver += RunGame;
+            timer.StartCountdown();
         }
         
 
@@ -27,12 +28,12 @@ namespace ShootEmUp.Game
         }
         private void RunGame()
         {
-            startTimer.OnTimerIsOver -= RunGame;
+            timer.OnTimerIsOver -= RunGame;
             gameManager.StartGame();
         }
         private void OnDestroy()
         {
-            startTimer.OnTimerIsOver -= RunGame;
+            timer.OnTimerIsOver -= RunGame;
         }
     }
 }

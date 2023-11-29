@@ -22,14 +22,14 @@ namespace ShootEmUp
             _currentTime = countdown;
         }
 
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (!_needCount)
             {
                 return;
             }
 
-            _currentTime -= Time.fixedDeltaTime;
+            _currentTime -= deltaTime;
             if (_currentTime <= 0)
             {
                 CountIsDownEvent?.Invoke();

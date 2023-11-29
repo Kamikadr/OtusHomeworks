@@ -9,7 +9,7 @@ namespace ShootEmUp.GameInput
         public event Action OnFireEvent;
         public event Action<Vector2> OnMoveEvent;
 
-        public void OnUpdate()
+        public void OnUpdate(float deltaTime)
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {

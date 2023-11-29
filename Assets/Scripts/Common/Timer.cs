@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace ShootEmUp.Game
+namespace ShootEmUp.Common
 {
-    public class StartTimer: MonoBehaviour
+    public class Timer: MonoBehaviour
     {
         [SerializeField] private float countdown;
         [SerializeField] private float tick;
@@ -13,9 +13,9 @@ namespace ShootEmUp.Game
         public Action<float> LastTimeEvent;
         public void StartCountdown()
         {
-            StartCoroutine(CountdownCorutine());
+            StartCoroutine(CountdownCoroutine());
         }
-        private IEnumerator CountdownCorutine()
+        private IEnumerator CountdownCoroutine()
         {
             var timeLeft = countdown;
             while (timeLeft > 0)

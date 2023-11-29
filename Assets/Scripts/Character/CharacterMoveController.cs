@@ -21,7 +21,7 @@ namespace ShootEmUp.Characters
             input.OnMoveEvent += MoveCharacter;
         }
 
-        public void Finish()
+        public void OnFinish()
         {
             input.OnMoveEvent -= MoveCharacter;
         }

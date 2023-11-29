@@ -25,17 +25,17 @@ namespace ShootEmUp.Characters
             hitPointsComponent.HpIsEmptyEvent += OnCharacterDeath;
         }
 
-        public void Finish()
+        public void OnFinish()
         {
             hitPointsComponent.HpIsEmptyEvent -= OnCharacterDeath;
         }
 
-        public void Pause()
+        public void OnPause()
         {
             hitPointsComponent.HpIsEmptyEvent -= OnCharacterDeath;
         }
 
-        public void Resume()
+        public void OnResume()
         {
             hitPointsComponent.HpIsEmptyEvent += OnCharacterDeath;
         }

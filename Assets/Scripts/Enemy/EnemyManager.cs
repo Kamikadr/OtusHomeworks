@@ -46,7 +46,7 @@ namespace ShootEmUp.Enemies
         }
 
 
-        public void Finish()
+        public void OnFinish()
         {
             foreach (var enemyObject in _activeEnemies)
             {
@@ -56,7 +56,7 @@ namespace ShootEmUp.Enemies
             _activeEnemies.Clear();
         }
         
-        public void Pause()
+        public void OnPause()
         {
             foreach (var enemyObject in _activeEnemies)
             {
@@ -65,7 +65,7 @@ namespace ShootEmUp.Enemies
             }
         }
 
-        public void Resume()
+        public void OnResume()
         {
             foreach (var enemyObject in _activeEnemies)
             {

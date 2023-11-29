@@ -22,7 +22,7 @@ namespace ShootEmUp
             IsReachedChange?.Invoke(_isReached);
         }
 
-        public void OnFixedUpdate()
+        public void OnFixedUpdate(float deltaTime)
         {
             if (_isReached)
             {

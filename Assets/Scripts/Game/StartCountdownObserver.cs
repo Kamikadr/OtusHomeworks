@@ -1,4 +1,5 @@
 using System;
+using ShootEmUp.Common;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,11 +7,11 @@ namespace ShootEmUp.Game
 {
     public class StartCountdownObserver: MonoBehaviour
     {
-        [SerializeField] private StartTimer startTimer;
+        [FormerlySerializedAs("startTimer")] [SerializeField] private Timer timer;
 
         private void Awake()
         {
-            startTimer.LastTimeEvent += DebugTimeInfo;
+            timer.LastTimeEvent += DebugTimeInfo;
         }
 
         private void DebugTimeInfo(float lastTime)
@@ -20,7 +21,7 @@ namespace ShootEmUp.Game
 
         private void OnDestroy()
         {
-            startTimer.LastTimeEvent -= DebugTimeInfo;
+            timer.LastTimeEvent -= DebugTimeInfo;
         }
     }
 }

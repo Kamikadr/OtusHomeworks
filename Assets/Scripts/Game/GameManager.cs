@@ -1,10 +1,11 @@
 using System.Collections.Generic;
+using App;
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp.Game
 {
-    [DefaultExecutionOrder(-1)]
+    
     public sealed class GameManager : MonoBehaviour
     {
         private readonly List<IGameStartListener> _gameStartListeners = new();
@@ -14,13 +15,7 @@ namespace ShootEmUp.Game
         private readonly List<IUpdateListener> _gameUpdateListeners = new();
         private readonly List<IFixedUpdateListener> _gameFixedUpdateListeners = new();
 
-        private bool _needUpdate;
-
-        private void Awake()
-        {
-            AddListeners(gameObject);
-        }
-
+        private GameState _gameState;
         public void AddListeners(GameObject obj)
         {
             var listeners = obj.GetComponentsInChildren<IGameListener>(true);
@@ -99,6 +94,11 @@ namespace ShootEmUp.Game
 
         public void StartGame()
         {
+            if (_gameState != GameState.None && _gameState != GameState.Finished)
+            {
+                return;
+            }
+            
             for (var i = 0; i < _gameStartListeners.Count; i++)
             {
                 _gameStartListeners[i].OnStart();
@@ -106,54 +106,70 @@ namespace ShootEmUp.Game
             
             Debug.Log("Game start!");
             Time.timeScale = 1;
-            _needUpdate = true;
+            _gameState = GameState.Playing;
         }
         public void FinishGame()
         {
+            if (_gameState != GameState.Playing)
+            {
+                return;
+            }
+            
             for (var i = 0; i < _gameFinishListeners.Count; i++)
             {
-                _gameFinishListeners[i].Finish();
+                _gameFinishListeners[i].OnFinish();
             }
             
             Debug.Log("Game over!");
             Time.timeScale = 0;
+            _gameState = GameState.Finished;
         }
         public void PauseGame()
         {
+            if (_gameState != GameState.Playing)
+            {
+                return;
+            }
+            
             for (var i = 0; i < _gamePauseListeners.Count; i++)
             {
-                _gamePauseListeners[i].Pause();
+                _gamePauseListeners[i].OnPause();
             }
             Time.timeScale = 0;
-            _needUpdate = false;
+            _gameState = GameState.Paused;
         }
         public void ResumeGame()
         {
+            if (_gameState != GameState.Paused)
+            {
+                return;
+            }
+            
             for (var i = 0; i < _gameResumeListeners.Count; i++)
             {
-                _gameResumeListeners[i].Resume();
+                _gameResumeListeners[i].OnResume();
             }
             Time.timeScale = 1;
-            _needUpdate = true;
+            _gameState = GameState.Playing;
         }
         
         private void FixedUpdate()
         {
-            if (!_needUpdate) return;
+            if (_gameState != GameState.Playing) return;
             
             for (var i = 0; i < _gameFixedUpdateListeners.Count; i++)
             {
-                _gameFixedUpdateListeners[i].OnFixedUpdate();
+                _gameFixedUpdateListeners[i].OnFixedUpdate(Time.fixedDeltaTime);
             }
         }
 
         private void Update()
         {
-            if (!_needUpdate) return;
+            if (_gameState != GameState.Playing) return;
             
             for (var i = 0; i < _gameUpdateListeners.Count; i++)
             {
-                _gameUpdateListeners[i].OnUpdate();
+                _gameUpdateListeners[i].OnUpdate(Time.deltaTime);
             }
         }
     }

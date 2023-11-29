@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemyManager : MonoBehaviour, IGameFinishListener
+    public sealed class EnemyManager : MonoBehaviour, IGameFinishListener, IGamePauseListener, IGameResumeListener
     {
         
         [SerializeField] private EnemySpawner enemySpawner;
@@ -23,6 +23,7 @@ namespace ShootEmUp.Enemies
                 var enemy = enemySpawner.SpawnEnemy();
                 if (_activeEnemies.Add(enemy.gameObject))
                 {
+                    enemy.Activate();
                     enemy.hitPointsComponent.HpIsEmptyEvent += OnDestroyed;
                 }
             }
@@ -33,9 +34,15 @@ namespace ShootEmUp.Enemies
             if (_activeEnemies.Remove(enemyGameObject))
             {
                 var enemy = enemyGameObject.GetComponent<Enemy>();
-                enemy.hitPointsComponent.HpIsEmptyEvent -= OnDestroyed;
-                enemySpawner.DespawnEnemy(enemy);
+                DestroyEnemy(enemy);
             }
+        }
+
+        private void DestroyEnemy(Enemy enemy)
+        {
+            enemy.Deactivate();
+            enemy.hitPointsComponent.HpIsEmptyEvent -= OnDestroyed;
+            enemySpawner.DespawnEnemy(enemy);
         }
 
 
@@ -44,9 +51,27 @@ namespace ShootEmUp.Enemies
             foreach (var enemyObject in _activeEnemies)
             {
                 var enemy = enemyObject.GetComponent<Enemy>();
-                enemySpawner.DespawnEnemy(enemy);
+               DestroyEnemy(enemy);
             }
             _activeEnemies.Clear();
+        }
+        
+        public void Pause()
+        {
+            foreach (var enemyObject in _activeEnemies)
+            {
+                var enemy = enemyObject.GetComponent<Enemy>();
+                enemy.Pause();
+            }
+        }
+
+        public void Resume()
+        {
+            foreach (var enemyObject in _activeEnemies)
+            {
+                var enemy = enemyObject.GetComponent<Enemy>();
+                enemy.Resume();
+            }
         }
     }
 }

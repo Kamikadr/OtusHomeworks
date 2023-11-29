@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class Enemy: MonoBehaviour, IGamePauseListener, IGameResumeListener
+    public class Enemy: MonoBehaviour
     {
         [SerializeField] private EnemyAttackController enemyAttackController;
         [SerializeField] private EnemyActionController enemyActionController;
@@ -27,7 +27,6 @@ namespace ShootEmUp.Enemies
         {
             transform.parent = parent;
         }
-        
         
         public void Pause()
         {

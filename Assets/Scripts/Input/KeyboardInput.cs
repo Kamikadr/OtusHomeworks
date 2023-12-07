@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace ShootEmUp.GameInput
 {
-    public sealed class KeyboardInput : MonoBehaviour, IFireInput, IMoveInput, IUpdateListener
+    public sealed class KeyboardInput : IFireInput, IMoveInput, IUpdateListener
     {
         public event Action OnFireEvent;
         public event Action<Vector2> OnMoveEvent;

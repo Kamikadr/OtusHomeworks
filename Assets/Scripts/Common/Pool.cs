@@ -4,18 +4,24 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Common
 {
-    public class Pool<T>: MonoBehaviour where T: MonoBehaviour
+    public class Pool<T> where T: MonoBehaviour
     {
-        [SerializeField] private int defaultItemCount;
-        [SerializeField] private Factory<T> itemFactory;
-        [SerializeField] private Transform poolContainer;
+        private readonly Factory<T> _itemFactory;
+        private readonly Transform _poolContainer;
         private readonly Queue<T> _pool = new();
-        
-        private void Awake()
+        private int _defaultItemCount;
+
+        public Pool(Factory<T> itemFactory, Transform poolContainer)
         {
+            _itemFactory = itemFactory;
+            _poolContainer = poolContainer;
+        }
+        private void Initialize(int defaultItemCount)
+        {
+            _defaultItemCount = defaultItemCount;
             for (var i = 0; i < defaultItemCount; i++)
             {
-                var newBullet = itemFactory.Create(poolContainer);
+                var newBullet = _itemFactory.Create(_poolContainer);
                 _pool.Enqueue(newBullet);
             }
         }
@@ -27,19 +33,19 @@ namespace ShootEmUp.Common
                 return item;
             }
 
-            return itemFactory.Create(poolContainer);
+            return _itemFactory.Create(_poolContainer);
         }
 
         public void Release(T item)
         {
-            if (_pool.Count < defaultItemCount)
+            if (_pool.Count < _defaultItemCount)
             {
-                item.transform.SetParent(poolContainer);
+                item.transform.SetParent(_poolContainer);
                 _pool.Enqueue(item);
             }
             else
             {
-                Destroy(item.gameObject);
+                Object.Destroy(item.gameObject);
             }
         }
     }

@@ -3,20 +3,19 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Common
 {
-    public class Factory<T>: MonoBehaviour where T:MonoBehaviour
+    public class Factory<T> where T:MonoBehaviour
     {
-        [SerializeField] private  T prefabItem;
-        
+        private readonly T _prefabItem;
+
+        public Factory(T prefabItem)
+        {
+            _prefabItem = prefabItem;
+        }
 
         public  T Create(Transform parent)
         {
-            var item = Instantiate(prefabItem, parent);
+            var item = Object.Instantiate(_prefabItem, parent);
             return item;
         }
-
-        protected virtual void OnCreate(T item)
-        {
-        }
-
     }
 }

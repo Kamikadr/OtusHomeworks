@@ -2,40 +2,47 @@
 using ShootEmUp.Game.Interfaces.GameCycle;
 using ShootEmUp.GameInput;
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp.Characters
 {
-    public class CharacterFireController: MonoBehaviour, IGameStartListener, IGameFinishListener
+    public class CharacterFireController: IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private KeyboardInput fireInput;
-        [SerializeField] private BulletSystem bulletSystem;
-        [SerializeField] private Character character;
-        [SerializeField] private BulletConfig bulletConfig;
-        
-        
+        private readonly IFireInput _fireInput;
+        private readonly BulletSystem _bulletSystem;
+        private readonly Character _character;
+        private readonly BulletConfig _bulletConfig;
+
+        public CharacterFireController(BulletSystem bulletSystem, IFireInput fireInput, Character character, BulletConfig bulletConfig)
+        {
+            _bulletSystem = bulletSystem;
+            _fireInput = fireInput;
+            _character = character;
+            _bulletConfig = bulletConfig;
+        }
         public void OnStart()
         {
-            fireInput.OnFireEvent += Fire;
+            _fireInput.OnFireEvent += Fire;
         }
         private void Fire()
         {
-            var weapon = character.weaponComponent;
+            var weapon = _character.weaponComponent;
             var bulletArgs = new BulletArgs
             {
                 IsPlayer = true,
-                PhysicsLayer = (int) bulletConfig.physicsLayer,
-                Color = bulletConfig.color,
-                Damage = bulletConfig.damage,
+                PhysicsLayer = (int) _bulletConfig.physicsLayer,
+                Color = _bulletConfig.color,
+                Damage = _bulletConfig.damage,
                 Position = weapon.Position,
-                Velocity = weapon.Rotation * Vector3.up * bulletConfig.speed
+                Velocity = weapon.Rotation * Vector3.up * _bulletConfig.speed
             };
-            bulletSystem.FlyBulletByArgs(bulletArgs);
+            _bulletSystem.FlyBulletByArgs(bulletArgs);
         }
   
         
         public void OnFinish()
         {
-            fireInput.OnFireEvent -= Fire;
+            _fireInput.OnFireEvent -= Fire;
         }
     }
 }

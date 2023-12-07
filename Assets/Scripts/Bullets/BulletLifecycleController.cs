@@ -5,13 +5,19 @@ using UnityEngine;
 
 namespace ShootEmUp.Bullets
 {
-    public class BulletLifecycleController: MonoBehaviour, IFixedUpdateListener, IGameFinishListener
+    public class BulletLifecycleController: IFixedUpdateListener, IGameFinishListener
     {
-        [SerializeField] private LevelBounds levelBounds;
-        [SerializeField] private BulletSpawnManager bulletSpawnManager;
+        private readonly LevelBounds _levelBounds;
+        private readonly BulletSpawnManager _bulletSpawnManager;
         private readonly HashSet<Bullet> _activeBullets = new();
         private readonly List<Bullet> _cache = new();
         
+        public BulletLifecycleController(LevelBounds levelBounds, BulletSpawnManager bulletSpawnManager)
+        {
+            _levelBounds = levelBounds;
+            _bulletSpawnManager = bulletSpawnManager;
+            Debug.Log("BulletLifecycleController");
+        }
 
         public void AddBullet(Bullet bullet)
         {
@@ -28,7 +34,7 @@ namespace ShootEmUp.Bullets
             for (int i = 0, count = _cache.Count; i < count; i++)
             {
                 var bullet = _cache[i];
-                if (!levelBounds.InBounds(bullet.GetPosition()))
+                if (!_levelBounds.InBounds(bullet.GetPosition()))
                 {
                     RemoveBullet(bullet);
                 }
@@ -40,7 +46,7 @@ namespace ShootEmUp.Bullets
             if (_activeBullets.Remove(bullet))
             {
                 bullet.OnCollisionEntered -= OnBulletCollision;
-                bulletSpawnManager.RemoveBullet(bullet);
+                _bulletSpawnManager.RemoveBullet(bullet);
             }
         }
         
@@ -53,7 +59,7 @@ namespace ShootEmUp.Bullets
         {
             foreach (var bullet in _activeBullets)
             {
-                bulletSpawnManager.RemoveBullet(bullet);
+                _bulletSpawnManager.RemoveBullet(bullet);
             }
             _activeBullets.Clear();
         }

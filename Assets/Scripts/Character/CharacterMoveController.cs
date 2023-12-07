@@ -6,24 +6,30 @@ using UnityEngine;
 
 namespace ShootEmUp.Characters
 {
-    public class CharacterMoveController:MonoBehaviour, IGameStartListener, IGameFinishListener
+    public class CharacterMoveController: IGameStartListener, IGameFinishListener
     {
-        [SerializeField] private KeyboardInput input;
-        [SerializeField] private MoveComponent moveComponent;
+        private readonly IMoveInput _moveInput;
+        private readonly MoveComponent _moveComponent;
         
+        public CharacterMoveController(IMoveInput moveInput, Character character)
+        {
+            _moveInput = moveInput;
+            _moveComponent = character.moveComponent;
+        }
+
         private void MoveCharacter(Vector2 destination)
         {
-            moveComponent.Move(destination);
+            _moveComponent.Move(destination);
         }
 
         public void OnStart()
         {
-            input.OnMoveEvent += MoveCharacter;
+            _moveInput.OnMoveEvent += MoveCharacter;
         }
 
         public void OnFinish()
         {
-            input.OnMoveEvent -= MoveCharacter;
+            _moveInput.OnMoveEvent -= MoveCharacter;
         }
     }
 }

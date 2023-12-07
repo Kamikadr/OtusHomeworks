@@ -2,15 +2,20 @@ using UnityEngine;
 
 namespace ShootEmUp.Bullets
 {
-    public class BulletSystem: MonoBehaviour
+    public class BulletSystem
     {
-        [SerializeField] private BulletSpawnManager bulletSpawnManager;
-        [SerializeField] private BulletLifecycleController bulletLifecycleController;
+        private readonly BulletSpawnManager _bulletSpawnManager;
+        private readonly BulletLifecycleController _bulletLifecycleController;
         
+        public BulletSystem(BulletSpawnManager bulletSpawnManager, BulletLifecycleController bulletLifecycleController)
+        {
+            _bulletSpawnManager = bulletSpawnManager;
+            _bulletLifecycleController = bulletLifecycleController;
+        }
         public void FlyBulletByArgs(BulletArgs bulletArgs)
         {
-            var bullet = bulletSpawnManager.SpawnBullet(bulletArgs);
-            bulletLifecycleController.AddBullet(bullet);
+            var bullet = _bulletSpawnManager.SpawnBullet(bulletArgs);
+            _bulletLifecycleController.AddBullet(bullet);
         }
     }
 }

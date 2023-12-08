@@ -6,7 +6,6 @@ using VContainer.Unity;
 
 namespace ShootEmUp.Enemies
 {
-    
     public class EnemyLifetimeScope: LifetimeScope
     {
         [SerializeField] private Enemy enemy;
@@ -15,24 +14,25 @@ namespace ShootEmUp.Enemies
         [SerializeField] private float enemyMoveThreshold;
         protected override void Configure(IContainerBuilder builder)
         {
-            RegisterAttackElements(builder);
             RegisterComponents(builder);
+            RegisterAttackElements(builder);
             RegisterMoveElements(builder);
         }
 
         private void RegisterMoveElements(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<EnemyMoveAgent>().
-                WithParameter(enemyMoveThreshold).
-                WithParameter(enemy.transform).
-                AsImplementedInterfaces().AsSelf();
+            builder.RegisterComponentInHierarchy<EnemyMoveAgent>()
+                .WithParameter(enemyMoveThreshold)
+                .WithParameter(enemy.transform)
+                .AsImplementedInterfaces().AsSelf();
         }
 
         private void RegisterComponents(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<HitPointsComponent>();
-            builder.RegisterComponentInHierarchy<MoveComponent>();
             builder.RegisterComponentInHierarchy<WeaponComponent>();
+            builder.RegisterComponentInHierarchy<MoveRigidbodyComponent>()
+                .AsImplementedInterfaces().As<MoveComponent>();
         }
 
         private void RegisterAttackElements(IContainerBuilder builder)
@@ -41,7 +41,9 @@ namespace ShootEmUp.Enemies
             builder.RegisterComponentInHierarchy<EnemyAttackAgent>();
             
             builder.Register<FireSetup>(Lifetime.Singleton);
-            builder.Register<CooldownCounter>(Lifetime.Singleton).WithParameter(enemyAttackCooldown);
+            builder.Register<CooldownCounter>(Lifetime.Singleton)
+                .WithParameter(enemyAttackCooldown)
+                .AsImplementedInterfaces().AsSelf();
             builder.Register<EnemyAttackController>(Lifetime.Singleton);
         }
     }

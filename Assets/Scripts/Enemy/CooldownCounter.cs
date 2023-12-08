@@ -4,12 +4,16 @@ using UnityEngine;
 
 namespace ShootEmUp
 {
-    public class CooldownCounter : MonoBehaviour, IFixedUpdateListener
+    public class CooldownCounter : IFixedUpdateListener
     {
-        [SerializeField] private float countdown;
+        private readonly float _countdown;
         private float _currentTime;
         private bool _needCount;
 
+        public CooldownCounter(float enemyCooldown)
+        {
+            _countdown = enemyCooldown;
+        }
         public event Action CountIsDownEvent;
 
         public void SetActive(bool value)
@@ -19,7 +23,7 @@ namespace ShootEmUp
 
         public void Reset()
         {
-            _currentTime = countdown;
+            _currentTime = _countdown;
         }
 
         public void OnFixedUpdate(float deltaTime)
@@ -33,7 +37,7 @@ namespace ShootEmUp
             if (_currentTime <= 0)
             {
                 CountIsDownEvent?.Invoke();
-                _currentTime += countdown;
+                _currentTime += _countdown;
             }
         }
     }

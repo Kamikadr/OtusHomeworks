@@ -9,7 +9,6 @@ namespace ShootEmUp.Enemies
     public sealed class EnemySpawner : MonoBehaviour
     {
         [SerializeField] private Character character;
-        [SerializeField] private BulletSystem bulletSystem;
         [SerializeField] private Transform worldTransform;
         [SerializeField] private Pool<Enemy> enemyPool;
         [SerializeField] private EnemyPositions enemyPositions;
@@ -23,9 +22,8 @@ namespace ShootEmUp.Enemies
             
             enemy.SetParent(worldTransform);
             enemy.SetPosition(spawnPosition.position);
-            enemy.enemyMoveAgent.SetDestination(attackPosition.position);
-            enemy.enemyAttackAgent.Construct(bulletSystem);
-            enemy.enemyAttackAgent.SetTarget(character.gameObject);
+            enemy.SetDestination(attackPosition.position);
+            enemy.SetTarget(character.gameObject);
 
             gameManager.AddListeners(enemy.gameObject);
             return enemy;

@@ -3,31 +3,33 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemyAttackAgent : MonoBehaviour
+    public sealed class EnemyAttackAgent
     {
-        [SerializeField] private FireSetup fireSetup;
-        [SerializeField] private BulletConfig bulletConfig;
-        private BulletSystem _bulletSystem;
+        private readonly FireSetup _fireSetup;
+        private readonly BulletConfig _bulletConfig;
+        private readonly BulletSystem _bulletSystem;
         
-        public void Construct(BulletSystem bulletSystem)
+        public EnemyAttackAgent(BulletSystem bulletSystem, FireSetup fireSetup, BulletConfig bulletConfig)
         {
             _bulletSystem = bulletSystem;
+            _fireSetup = fireSetup;
+            _bulletConfig = bulletConfig;
         }
         
         public void SetTarget(GameObject target)
         {
-            fireSetup.SetTarget(target);
+            _fireSetup.SetTarget(target);
         }
         public void Fire()
         {
-            if (fireSetup.TryGetFireData(out var fireData))
+            if (_fireSetup.TryGetFireData(out var fireData))
             {
                var bulletArgs = new BulletArgs
                 {
                     IsPlayer = false,
-                    PhysicsLayer = (int)bulletConfig.physicsLayer,
-                    Color = bulletConfig.color,
-                    Damage = bulletConfig.damage,
+                    PhysicsLayer = (int)_bulletConfig.physicsLayer,
+                    Color = _bulletConfig.color,
+                    Damage = _bulletConfig.damage,
                     Position = fireData.Position,
                     Velocity = fireData.Direction * 2.0f
                 };

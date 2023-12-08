@@ -1,29 +1,40 @@
+using System;
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
-    public class EnemyAttackController: MonoBehaviour
+    public class EnemyAttackController: IDisposable
     {
-        [SerializeField] private EnemyAttackAgent enemyAttackAgent;
-        [SerializeField] private CooldownCounter cooldownCounter;
+        private readonly EnemyAttackAgent _enemyAttackAgent;
+        private readonly CooldownCounter _cooldownCounter;
 
-        private void Awake()
+        public EnemyAttackController(EnemyAttackAgent enemyAttackAgent, CooldownCounter cooldownCounter)
         {
-            cooldownCounter.CountIsDownEvent += Fire;
+            _enemyAttackAgent = enemyAttackAgent;
+            _cooldownCounter = cooldownCounter;
         }
         public void SetActive(bool value)
         {
-            cooldownCounter.SetActive(value);
+            if (value)
+            {
+                _cooldownCounter.CountIsDownEvent += Fire;
+            }
+            else
+            {
+                _cooldownCounter.CountIsDownEvent -= Fire;
+            }
+            
+            _cooldownCounter.SetActive(value);
         }
         private void Fire()
         {
-            enemyAttackAgent.Fire();
+            _enemyAttackAgent.Fire();
         }
-        private void OnDestroy()
+        public void Dispose()
         {
-            cooldownCounter.CountIsDownEvent -= Fire;
+            _cooldownCounter.CountIsDownEvent -= Fire;
         }
         
     }

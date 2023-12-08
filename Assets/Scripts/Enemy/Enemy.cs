@@ -1,23 +1,46 @@
-﻿using ShootEmUp.Componets;
-using ShootEmUp.Game.Interfaces.GameCycle;
+﻿using System;
+using ShootEmUp.Componets;
 using UnityEngine;
+using VContainer;
 
 namespace ShootEmUp.Enemies
 {
+    
     public class Enemy: MonoBehaviour
     {
-        [SerializeField] private EnemyAttackController enemyAttackController;
-        [SerializeField] private EnemyActionController enemyActionController;
-        [SerializeField] public EnemyAttackAgent enemyAttackAgent;
-        [SerializeField] public EnemyMoveAgent enemyMoveAgent;
-        [SerializeField] public HitPointsComponent hitPointsComponent;
+        private EnemyAttackController _enemyAttackController;
+        private EnemyActionController _enemyActionController;
+        private EnemyAttackAgent _enemyAttackAgent;
+        private EnemyMoveAgent _enemyMoveAgent;
+        private HitPointsComponent _hitPointsComponent;
+        public event Action<Enemy> OnEnemyKilled;
 
+        [Inject]
+        public void Construct(EnemyAttackController enemyAttackController,
+            EnemyAttackAgent enemyAttackAgent,
+            EnemyMoveAgent enemyMoveAgent,
+            HitPointsComponent hitPointsComponent
+            )
+        {
+            _enemyAttackController = enemyAttackController;
+            _enemyAttackAgent = enemyAttackAgent;
+            _enemyMoveAgent = enemyMoveAgent;
+            _hitPointsComponent = hitPointsComponent;
 
+            _enemyActionController = new EnemyActionController(_enemyMoveAgent, _enemyAttackController);
+        }
         public void Activate()
         {
-            enemyActionController.OnStart();
-            hitPointsComponent.Refresh();
+            _enemyActionController.OnStart();
+            _hitPointsComponent.Refresh();
+            _hitPointsComponent.HpIsEmptyEvent += OnHpIsEmptyEvent;
         }
+
+        private void OnHpIsEmptyEvent(GameObject _)
+        {
+            OnEnemyKilled?.Invoke(this);
+        }
+
         public void SetPosition(Vector2 position)
         {
             transform.position = position;
@@ -30,16 +53,27 @@ namespace ShootEmUp.Enemies
         
         public void Pause()
         {
-            enemyActionController.OnStop();
+            _enemyActionController.OnStop();
         }
         public void Resume()
         {
-            enemyActionController.OnStart();
+            _enemyActionController.OnStart();
         }
         public void Deactivate()
         {
-            enemyActionController.OnStop();
-            enemyActionController.Refresh();
+            _enemyActionController.OnStop();
+            _enemyActionController.Refresh();
+        }
+
+
+        public void SetTarget(GameObject target)
+        {
+            _enemyAttackAgent.SetTarget(target);
+        }
+
+        public void SetDestination(Vector2 endPoint)
+        {
+            _enemyMoveAgent.SetDestination(endPoint);
         }
     }
 }

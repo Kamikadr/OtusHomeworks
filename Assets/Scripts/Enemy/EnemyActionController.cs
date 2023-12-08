@@ -2,13 +2,20 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class EnemyActionController: MonoBehaviour
+    public class EnemyActionController
     {
-        [SerializeField] private EnemyAttackController enemyAttackController;
-        [SerializeField] public EnemyMoveAgent enemyMoveAgent;
+        private readonly EnemyAttackController _enemyAttackController;
+        private readonly EnemyMoveAgent _enemyMoveAgent;
         
         private bool _isActive;
         private bool _isEnemyCanAttack;
+
+        public EnemyActionController(EnemyMoveAgent enemyMoveAgent, EnemyAttackController enemyAttackController)
+        {
+            _enemyMoveAgent = enemyMoveAgent;
+            _enemyAttackController = enemyAttackController;
+        }
+
         public void OnStart()
         {
             if (_isActive)
@@ -16,14 +23,14 @@ namespace ShootEmUp.Enemies
                 return;
             }
             
-            enemyMoveAgent.IsReachedChange += OnReachedChange;
-            enemyAttackController.SetActive(_isEnemyCanAttack);
+            _enemyMoveAgent.IsReachedChange += OnReachedChange;
+            _enemyAttackController.SetActive(_isEnemyCanAttack);
             _isActive = true;
         }
         
         private void OnReachedChange(bool value)
         {
-            enemyAttackController.SetActive(value);
+            _enemyAttackController.SetActive(value);
             _isEnemyCanAttack = value;
         }
 
@@ -33,8 +40,8 @@ namespace ShootEmUp.Enemies
             {
                 return;
             }
-            enemyMoveAgent.IsReachedChange -= OnReachedChange;
-            enemyAttackController.SetActive(false);
+            _enemyMoveAgent.IsReachedChange -= OnReachedChange;
+            _enemyAttackController.SetActive(false);
             _isActive = false;
         }
 

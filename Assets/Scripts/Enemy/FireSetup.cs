@@ -3,12 +3,18 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class FireSetup: MonoBehaviour
+    public class FireSetup
     {
-        [SerializeField] private WeaponComponent weaponComponent;
+        private readonly WeaponComponent _weaponComponent;
+        
         private GameObject _target;
         private HitPointsComponent _targetHitPoint;
         
+        public FireSetup(WeaponComponent weaponComponent)
+        {
+            _weaponComponent = weaponComponent;
+        }
+
         public bool TryGetFireData(out FireData fireData)
         {
             fireData = new FireData();
@@ -17,7 +23,7 @@ namespace ShootEmUp.Enemies
                 return false;
             }
             
-            fireData.Position = weaponComponent.Position;
+            fireData.Position = _weaponComponent.Position;
             var vector = (Vector2) _target.transform.position - fireData.Position;
             fireData.Direction = vector.normalized;
             return true;

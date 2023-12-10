@@ -728,7 +728,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &890665316
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1078,7 +1078,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1267496028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,11 +1382,14 @@ MonoBehaviour:
   - {fileID: 78117031}
   - {fileID: 883274640}
   enemySpawnDelay: 2
-  enemyMaxCount: 7
+  enemyMaxCount: 5
   backgroundTransform: {fileID: 8010320557783749713}
   backgroundMoveConfig: {fileID: 11400000, guid: c94ab446aefa3a043ae9701139f1c1ca,
     type: 2}
   playerBulletConfig: {fileID: 11400000, guid: 7138ae5d32d814e0ca50c616c65ea105, type: 2}
+  pauseResumeButtonStateController: {fileID: 654476500}
+  pauseResumeButtonListener: {fileID: 654476499}
+  startButtonListener: {fileID: 654476498}
 --- !u!4 &1307842602
 Transform:
   m_ObjectHideFlags: 0

@@ -75,5 +75,10 @@ namespace ShootEmUp.Enemies
         {
             _enemyMoveAgent.SetDestination(endPoint);
         }
+
+        public void UpdateEnemy(float deltaTime)
+        {
+            _enemyMoveAgent.UpdateMove(deltaTime);
+        }
     }
 }

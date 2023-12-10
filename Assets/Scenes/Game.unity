@@ -1382,7 +1382,7 @@ MonoBehaviour:
   - {fileID: 78117031}
   - {fileID: 883274640}
   enemySpawnDelay: 2
-  enemyMaxCount: 0
+  enemyMaxCount: 7
   backgroundTransform: {fileID: 8010320557783749713}
   backgroundMoveConfig: {fileID: 11400000, guid: c94ab446aefa3a043ae9701139f1c1ca,
     type: 2}

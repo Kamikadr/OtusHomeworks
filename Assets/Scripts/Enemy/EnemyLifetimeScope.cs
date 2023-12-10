@@ -8,12 +8,19 @@ namespace ShootEmUp.Enemies
 {
     public class EnemyLifetimeScope: LifetimeScope
     {
-        [SerializeField] private Transform enemyTransform;
+        [SerializeField] private Enemy enemy;
         [SerializeField] private BulletConfig bulletConfig;
         [SerializeField] private float enemyAttackCooldown;
         [SerializeField] private float enemyMoveThreshold;
+        
+        [Header("Enemy Components")]
+        [SerializeField] private HitPointsComponent hitPointsComponent;
+        [SerializeField] private WeaponComponent weaponComponent;
+        [SerializeField] private MoveComponent moveComponent;
         protected override void Configure(IContainerBuilder builder)
         {
+            builder.RegisterComponent(enemy);
+            
             RegisterComponents(builder);
             RegisterAttackElements(builder);
             RegisterMoveElements(builder);
@@ -21,24 +28,23 @@ namespace ShootEmUp.Enemies
 
         private void RegisterMoveElements(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<EnemyMoveAgent>()
+            builder.Register<EnemyMoveAgent>(Lifetime.Singleton)
                 .WithParameter(enemyMoveThreshold)
-                .WithParameter(enemyTransform)
+                .WithParameter(enemy.transform)
                 .AsImplementedInterfaces().AsSelf();
         }
 
         private void RegisterComponents(IContainerBuilder builder)
         {
-            builder.RegisterComponentInHierarchy<HitPointsComponent>();
-            builder.RegisterComponentInHierarchy<WeaponComponent>();
-            builder.RegisterComponentInHierarchy<MoveRigidbodyComponent>()
-                .AsImplementedInterfaces().As<MoveComponent>();
+            builder.RegisterInstance(hitPointsComponent);
+            builder.RegisterInstance(weaponComponent);
+            builder.RegisterInstance(moveComponent);
         }
 
         private void RegisterAttackElements(IContainerBuilder builder)
         {
             builder.RegisterInstance(bulletConfig);
-            builder.RegisterComponentInHierarchy<EnemyAttackAgent>();
+            builder.Register<EnemyAttackAgent>(Lifetime.Singleton);
             
             builder.Register<FireSetup>(Lifetime.Singleton);
             builder.Register<CooldownCounter>(Lifetime.Singleton)

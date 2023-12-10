@@ -1,13 +1,15 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class CooldownCounter : IFixedUpdateListener
+    public class CooldownCounter: IDisposable
     {
         private readonly float _countdown;
-        private float _currentTime;
+        private CancellationTokenSource _cancellationTokenSource;
         private bool _needCount;
 
         public CooldownCounter(float enemyCooldown)
@@ -19,26 +21,37 @@ namespace ShootEmUp.Enemies
         public void SetActive(bool value)
         {
             _needCount = value;
+            if (value)
+            {
+                _cancellationTokenSource = new CancellationTokenSource();
+                CooldownTask(_cancellationTokenSource.Token);
+            }
+            else
+            {
+                _cancellationTokenSource?.Cancel();
+            }
         }
 
-        public void Reset()
+        private async Task CooldownTask(CancellationToken token = default)
         {
-            _currentTime = _countdown;
+            try
+            {
+                while (_needCount)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(_countdown), token);
+                    CountIsDownEvent?.Invoke();
+                }
+            }
+            finally
+            {
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
+            }
         }
 
-        public void OnFixedUpdate(float deltaTime)
+        public void Dispose()
         {
-            if (!_needCount)
-            {
-                return;
-            }
-
-            _currentTime -= deltaTime;
-            if (_currentTime <= 0)
-            {
-                CountIsDownEvent?.Invoke();
-                _currentTime += _countdown;
-            }
+            _cancellationTokenSource?.Cancel();
         }
     }
 }

@@ -1,11 +1,10 @@
 using System;
 using ShootEmUp.Componets;
-using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent : IFixedUpdateListener
+    public sealed class EnemyMoveAgent
     {
         private readonly MoveComponent _moveComponent;
         private readonly Transform _enemyTransform;
@@ -31,7 +30,7 @@ namespace ShootEmUp
             IsReachedChange?.Invoke(_isReached);
         }
 
-        public void OnFixedUpdate(float deltaTime)
+        public void UpdateMove(float deltaTime)
         {
             if (_isReached)
             {
@@ -43,12 +42,12 @@ namespace ShootEmUp
             {
                 _isReached = true;
                 IsReachedChange?.Invoke(_isReached);
-                _moveComponent.Move(Vector2.zero);
+                _moveComponent.Move(Vector2.zero, deltaTime);
                 return;
             }
 
             var direction = vector.normalized;
-            _moveComponent.Move(direction);
+            _moveComponent.Move(direction, deltaTime);
         }
     }
 }

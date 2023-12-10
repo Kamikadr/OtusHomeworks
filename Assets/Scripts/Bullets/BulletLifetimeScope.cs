@@ -1,3 +1,4 @@
+using App;
 using Game;
 using ShootEmUp.Characters;
 using ShootEmUp.Common;
@@ -6,6 +7,7 @@ using ShootEmUp.Enemies;
 using ShootEmUp.Game;
 using ShootEmUp.GameInput;
 using ShootEmUp.Level;
+using UI;
 using UnityEngine;
 using UnityEngine.Serialization;
 using VContainer;
@@ -40,10 +42,15 @@ namespace ShootEmUp.Bullets
         [SerializeField] private Transform backgroundTransform;
         [SerializeField] private BackgroundMoveConfig backgroundMoveConfig;
         [SerializeField] private BulletConfig playerBulletConfig;
+
+        [Header("UI")]
+        [SerializeField] private PauseResumeButtonStateController pauseResumeButtonStateController;
+        [SerializeField] private PauseResumeButtonListener pauseResumeButtonListener;
+        [SerializeField] private StartButtonListener startButtonListener;
         protected override void Configure(IContainerBuilder builder)
         {
             builder.RegisterComponentInHierarchy<GameManager>();
-            builder.Register<GameContext>(Lifetime.Singleton);
+            
             builder.Register<CharacterDeathController>(Lifetime.Singleton);
             builder.Register<GameCooldownLauncher>(Lifetime.Singleton).WithParameter(startTimerSettings)
                 .AsImplementedInterfaces().AsSelf();
@@ -53,6 +60,17 @@ namespace ShootEmUp.Bullets
             RegisterBulletElements(builder);
             RegisterCharacterComponents(builder);
             RegisterEnemyElements(builder);
+
+            RegisterUI(builder);
+            
+            builder.Register<GameContext>(Lifetime.Singleton);
+        }
+
+        private void RegisterUI(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(pauseResumeButtonStateController).AsImplementedInterfaces();
+            builder.RegisterInstance(pauseResumeButtonListener).AsImplementedInterfaces();
+            builder.RegisterInstance(startButtonListener).AsImplementedInterfaces();
         }
 
         private void RegisterInput(IContainerBuilder builder)
@@ -78,12 +96,12 @@ namespace ShootEmUp.Bullets
                 }
             }, Lifetime.Transient);*/
             builder.RegisterInstance(enemyPrefab);
-            builder.Register<Factory<Enemy>>(Lifetime.Singleton);
+            builder.Register<Factory<Enemy>>(Lifetime.Singleton).WithParameter(this);
             builder.Register<Pool<Enemy>>(Lifetime.Singleton).WithParameter(enemyPoolContainer);
             builder.RegisterInstance(new EnemyPositions(enemySpawnPositions, enemyFirePositions));
             builder.Register<EnemyCountdownSpawner>(Lifetime.Singleton).WithParameter(enemySpawnDelay)
                 .AsImplementedInterfaces().AsSelf();
-            builder.Register<EnemyManager>(Lifetime.Singleton).WithParameter(enemyMaxCount);
+            builder.Register<EnemyManager>(Lifetime.Singleton).WithParameter(enemyMaxCount).AsImplementedInterfaces().AsSelf();
             builder.Register<EnemySpawner>(Lifetime.Singleton).WithParameter(worldTransform).WithParameter(enemyMaxCount);
         }
 
@@ -104,8 +122,6 @@ namespace ShootEmUp.Bullets
         {
             builder.RegisterComponent(character).AsImplementedInterfaces().AsSelf();
             builder.Register<CharacterDeathObserver>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
-            builder.RegisterComponentInHierarchy<HitPointsComponent>().AsImplementedInterfaces().AsSelf();
-            builder.RegisterComponentInHierarchy<MoveRigidbodyComponent>().AsImplementedInterfaces().AsSelf();
             builder.Register<CharacterFireController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.Register<CharacterMoveController>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
             builder.RegisterInstance(playerBulletConfig);

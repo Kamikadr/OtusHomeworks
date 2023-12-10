@@ -14,9 +14,9 @@ namespace ShootEmUp.Characters
     {
         private readonly HitPointsComponent _hitPointsComponent;
         public event Action OnPlayerDeath;
-        public CharacterDeathObserver(HitPointsComponent hitPointsComponent)
+        public CharacterDeathObserver(Character character)
         {
-            _hitPointsComponent = hitPointsComponent;
+            _hitPointsComponent = character.hitPointsComponent;
         }
 
         private void OnCharacterDeath(GameObject obj)

@@ -6,10 +6,11 @@ using UnityEngine;
 
 namespace ShootEmUp.Characters
 {
-    public class CharacterMoveController: IGameStartListener, IGameFinishListener
+    public class CharacterMoveController: IGameStartListener, IGameFinishListener, IFixedUpdateListener
     {
         private readonly IMoveInput _moveInput;
         private readonly MoveComponent _moveComponent;
+        private Vector2 _destination;
         
         public CharacterMoveController(IMoveInput moveInput, Character character)
         {
@@ -19,7 +20,7 @@ namespace ShootEmUp.Characters
 
         private void MoveCharacter(Vector2 destination)
         {
-            _moveComponent.Move(destination);
+            _destination = destination;
         }
 
         public void OnStart()
@@ -30,6 +31,11 @@ namespace ShootEmUp.Characters
         public void OnFinish()
         {
             _moveInput.OnMoveEvent -= MoveCharacter;
+        }
+
+        public void OnFixedUpdate(float deltaTime)
+        {
+            _moveComponent.Move(_destination, deltaTime);
         }
     }
 }

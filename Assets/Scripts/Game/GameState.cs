@@ -1,6 +1,6 @@
 namespace App
 {
-    internal enum GameState
+    public enum GameState
     {
         None,
         Playing,

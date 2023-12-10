@@ -1,27 +1,28 @@
 using System;
 using ShootEmUp.Common;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game
 {
-    public class StartCountdownObserver: MonoBehaviour
+    public class StartCountdownObserver: IDisposable
     {
-        [FormerlySerializedAs("startTimer")] [SerializeField] private Timer timer;
+        private readonly Timer _timer;
 
-        private void Awake()
+        public StartCountdownObserver(Timer timer)
         {
-            timer.LastTimeEvent += DebugTimeInfo;
+            _timer = timer;
+            _timer.LastTimeEvent += DebugTimeInfo;
         }
-
+        
         private void DebugTimeInfo(float lastTime)
         {
-            Debug.Log($"the game will start in {lastTime} second");
+            Debug.Log($"The game will start in {lastTime} second");
         }
+        
 
-        private void OnDestroy()
+        public void Dispose()
         {
-            timer.LastTimeEvent -= DebugTimeInfo;
+            _timer.LastTimeEvent -= DebugTimeInfo;
         }
     }
 }

@@ -4,16 +4,22 @@ using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using VContainer;
 
 namespace App
 {
     public class StartButtonListener: MonoBehaviour, IGameFinishListener
     {
-        [SerializeField] private GameCooldownLauncher gameCooldownLauncher;
         [SerializeField] private Button startButton;
         [SerializeField] private Button pauseButton;
         
+        private GameCooldownLauncher _gameCooldownLauncher;
 
+        [Inject]
+        private void Construct(GameCooldownLauncher gameCooldownLauncher)
+        {
+            _gameCooldownLauncher = gameCooldownLauncher;
+        }
         private void Awake()
         {
             startButton.onClick.AddListener(StartGame);
@@ -22,7 +28,7 @@ namespace App
 
         private void StartGame()
         {
-            gameCooldownLauncher.StartGame();
+            _gameCooldownLauncher.StartGame();
             startButton.gameObject.SetActive(false);
             
             startButton.onClick.RemoveListener(StartGame);

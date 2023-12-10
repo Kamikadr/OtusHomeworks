@@ -5,33 +5,35 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Level
 {
-    public sealed class LevelBackground : MonoBehaviour, IFixedUpdateListener
+    public sealed class LevelBackground : IFixedUpdateListener
     {
-        [SerializeField] private BackgroundMoveConfig backgroundMoveConfig;
+        private readonly BackgroundMoveConfig _backgroundMoveConfig;
+        private readonly Transform _backgroundTransform;
+        private readonly float _startPositionY;
+        private readonly float _endPositionY;
+        private readonly float _movingSpeedY;
+        private readonly float _positionX;
+        private readonly float _positionZ;
         
-        private float _startPositionY;
-        private float _endPositionY;
-        private float _movingSpeedY;
-        private float _positionX;
-        private float _positionZ;
-        private Transform _myTransform;
-        
-        private void Awake()
+
+        public LevelBackground(BackgroundMoveConfig backgroundMoveConfig, Transform backgroundTransform)
         {
-            _startPositionY = backgroundMoveConfig.startPositionY;
-            _endPositionY = backgroundMoveConfig.endPositionY;
-            _movingSpeedY = backgroundMoveConfig.movingSpeedY;
-            _myTransform = transform;
-            var position = _myTransform.position;
+            _backgroundMoveConfig = backgroundMoveConfig;
+            _backgroundTransform = backgroundTransform;
+
+            _startPositionY = _backgroundMoveConfig.startPositionY;
+            _endPositionY = _backgroundMoveConfig.endPositionY;
+            _movingSpeedY = _backgroundMoveConfig.movingSpeedY;
+            var position = _backgroundTransform.position;
             _positionX = position.x;
             _positionZ = position.z;
         }
 
         public void OnFixedUpdate(float deltaTime)
         {
-            if (_myTransform.position.y <= _endPositionY)
+            if (_backgroundTransform.position.y <= _endPositionY)
             {
-                _myTransform.position = new Vector3(
+                _backgroundTransform.position = new Vector3(
                     _positionX,
                     _startPositionY,
                     _positionZ
@@ -39,7 +41,7 @@ namespace ShootEmUp.Level
             }
             else
             {
-                _myTransform.position -= new Vector3(
+                _backgroundTransform.position -= new Vector3(
                     _positionX,
                     _movingSpeedY * deltaTime,
                     _positionZ

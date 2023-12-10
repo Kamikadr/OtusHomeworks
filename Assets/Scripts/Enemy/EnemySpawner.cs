@@ -1,4 +1,3 @@
-using ShootEmUp.Bullets;
 using ShootEmUp.Characters;
 using ShootEmUp.Common;
 using ShootEmUp.Game;
@@ -6,33 +5,44 @@ using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemySpawner : MonoBehaviour
+    public sealed class EnemySpawner
     {
-        [SerializeField] private Character character;
-        [SerializeField] private Transform worldTransform;
-        [SerializeField] private Pool<Enemy> enemyPool;
-        [SerializeField] private EnemyPositions enemyPositions;
-        [SerializeField] private GameManager gameManager;
+        private readonly Character _character;
+        private readonly Transform _worldTransform;
+        private readonly Pool<Enemy> _enemyPool;
+        private readonly EnemyPositions _enemyPositions;
+
+        public EnemySpawner(Character character,
+            Pool<Enemy> enemyPool,
+            EnemyPositions enemyPositions,
+            Transform worldTransform,
+            int defaultEnemyCount)
+        {
+            _character = character;
+            _enemyPool = enemyPool;
+            _enemyPositions = enemyPositions;
+            _worldTransform = worldTransform;
+            
+            _enemyPool.Initialize(defaultEnemyCount);
+        }
 
         public Enemy SpawnEnemy()
         {
-            var enemy = enemyPool.Get();
-            var spawnPosition = enemyPositions.RandomSpawnPosition();
-            var attackPosition = enemyPositions.RandomAttackPosition();
+            var enemy = _enemyPool.Get();
+            var spawnPosition = _enemyPositions.RandomSpawnPosition();
+            var attackPosition = _enemyPositions.RandomAttackPosition();
             
-            enemy.SetParent(worldTransform);
+            enemy.SetParent(_worldTransform);
             enemy.SetPosition(spawnPosition.position);
             enemy.SetDestination(attackPosition.position);
-            enemy.SetTarget(character.gameObject);
-
-            gameManager.AddListeners(enemy.gameObject);
+            enemy.SetTarget(_character.gameObject);
+            
             return enemy;
         }
 
         public void DespawnEnemy(Enemy enemy)
         {
-            enemyPool.Release(enemy);
-            gameManager.RemoveListeners(enemy.gameObject);
+            _enemyPool.Release(enemy);
         }
     }
 }

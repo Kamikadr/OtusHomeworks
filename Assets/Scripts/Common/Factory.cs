@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer.Unity;
 
 namespace ShootEmUp.Common
 {
@@ -15,6 +16,7 @@ namespace ShootEmUp.Common
         public  T Create(Transform parent)
         {
             var item = Object.Instantiate(_prefabItem, parent);
+
             return item;
         }
     }

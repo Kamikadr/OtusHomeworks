@@ -16,7 +16,7 @@ namespace ShootEmUp.Common
             _itemFactory = itemFactory;
             _poolContainer = poolContainer;
         }
-        private void Initialize(int defaultItemCount)
+        public void Initialize(int defaultItemCount)
         {
             _defaultItemCount = defaultItemCount;
             for (var i = 0; i < defaultItemCount; i++)

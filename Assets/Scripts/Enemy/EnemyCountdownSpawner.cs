@@ -1,20 +1,28 @@
 using System;
-using System.Collections;
+using System.Threading;
+using System.Threading.Tasks;
 using ShootEmUp.Game.Interfaces.GameCycle;
-using UnityEngine;
 
 namespace ShootEmUp.Enemies
 {
-    public class EnemyCountdownSpawner: MonoBehaviour,
+    public class EnemyCountdownSpawner:
         IGameStartListener,
         IGameFinishListener,
         IGamePauseListener,
-        IGameResumeListener
+        IGameResumeListener,
+        IDisposable
     {
-        [SerializeField] private EnemyManager enemyManager;
-        [SerializeField] private float countdownInSeconds;
+        private readonly EnemyManager _enemyManager;
+        private readonly float _countdownInSeconds;
         private bool _isNeedSpawningEnemies;
-        private Coroutine _currentCoroutine;
+        private bool _isSpawning;
+        private CancellationTokenSource _cancellationTokenSource;
+        
+        public EnemyCountdownSpawner(EnemyManager enemyManager, float spawnEnemyCooldown)
+        {
+            _enemyManager = enemyManager;
+            _countdownInSeconds = spawnEnemyCooldown;
+        }
 
         public void OnStart()
         {
@@ -23,23 +31,42 @@ namespace ShootEmUp.Enemies
         
         private void StartSpawning()
         {
-            _isNeedSpawningEnemies = true;
-            _currentCoroutine = StartCoroutine(SpawnEnemiesCoroutine());
+            if (!_isSpawning)
+            {
+                _cancellationTokenSource = new CancellationTokenSource();
+                _isNeedSpawningEnemies = true;
+
+                SpawnEnemiesAsync(_cancellationTokenSource.Token);
+            }
         }
         
-        private IEnumerator SpawnEnemiesCoroutine()
+        private async Task SpawnEnemiesAsync(CancellationToken token = default)
         {
-            while (_isNeedSpawningEnemies)
+            _isSpawning = true;
+            try
             {
-                yield return new WaitForSeconds(countdownInSeconds);
-                enemyManager.SpawnEnemy();
+                while (_isNeedSpawningEnemies)
+                {
+                    await Task.Delay(TimeSpan.FromSeconds(_countdownInSeconds), token);
+                    _enemyManager.SpawnEnemy();
+                }
+            }
+            finally
+            {
+                _isSpawning = false;
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
             }
         }
 
         private void StopSpawning()
         {
-            StopCoroutine(_currentCoroutine);
+            Cancel();
             _isNeedSpawningEnemies = false;
+        }
+        private void Cancel()
+        {
+            _cancellationTokenSource?.Cancel();
         }
         
         public void OnFinish()
@@ -55,6 +82,13 @@ namespace ShootEmUp.Enemies
         public void OnResume()
         {
             StartSpawning();
+        }
+
+        public void Dispose()
+        {
+            Cancel();
+            _cancellationTokenSource?.Dispose();
+            _cancellationTokenSource = null;
         }
     }
 }

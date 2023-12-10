@@ -1,4 +1,5 @@
-﻿using ShootEmUp.Componets;
+﻿using System;
+using ShootEmUp.Componets;
 using ShootEmUp.Game;
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
@@ -12,16 +13,15 @@ namespace ShootEmUp.Characters
         IGameResumeListener
     {
         private readonly HitPointsComponent _hitPointsComponent;
-        private readonly GameManager _gameManager;
-        public CharacterDeathObserver(GameManager gameManager, HitPointsComponent hitPointsComponent)
+        public event Action OnPlayerDeath;
+        public CharacterDeathObserver(HitPointsComponent hitPointsComponent)
         {
-            _gameManager = gameManager;
             _hitPointsComponent = hitPointsComponent;
         }
 
         private void OnCharacterDeath(GameObject obj)
         {
-            _gameManager.FinishGame();
+            OnPlayerDeath?.Invoke();
         }
         
         public void OnStart()

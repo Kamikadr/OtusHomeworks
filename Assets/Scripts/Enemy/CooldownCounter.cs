@@ -2,7 +2,7 @@
 using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
-namespace ShootEmUp
+namespace ShootEmUp.Enemies
 {
     public class CooldownCounter : IFixedUpdateListener
     {

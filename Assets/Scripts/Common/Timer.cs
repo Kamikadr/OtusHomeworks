@@ -1,31 +1,64 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
+using ShootEmUp.Game;
 using UnityEngine;
 
 namespace ShootEmUp.Common
 {
-    public class Timer: MonoBehaviour
+    public class Timer: IDisposable
     {
-        [SerializeField] private float countdown;
-        [SerializeField] private float tick;
+        private CancellationTokenSource _cancellationTokenSource;
+        private bool _isCounting;
+        
+        
         public Action OnTimerIsOver;
         public Action<float> LastTimeEvent;
-        public void StartCountdown()
+        
+        public async Task StartCountdownAsync(TimerSettings timerSettings)
         {
-            StartCoroutine(CountdownCoroutine());
+            if (_isCounting)
+            {
+                return;
+            }
+            
+            _cancellationTokenSource = new CancellationTokenSource();
+            _isCounting = true;
+            try
+            {
+                await CountdownTask(timerSettings.cooldownTime, timerSettings.cooldownTick, _cancellationTokenSource.Token);
+                OnTimerIsOver?.Invoke();
+            }
+            finally
+            {
+                _isCounting = false;
+                _cancellationTokenSource.Dispose();
+                _cancellationTokenSource = null;
+            }
+            
         }
-        private IEnumerator CountdownCoroutine()
+        private async Task CountdownTask(float countdown, float tick, CancellationToken token = default)
         {
             var timeLeft = countdown;
-            while (timeLeft > 0)
+            while (timeLeft > tick)
             {
+                await Task.Delay(TimeSpan.FromSeconds(tick), token);
                 LastTimeEvent?.Invoke(timeLeft);
-                yield return new WaitForSecondsRealtime(tick);
                 timeLeft -= tick;
             }
-            OnTimerIsOver?.Invoke();
+            await Task.Delay(TimeSpan.FromSeconds(timeLeft), token);
         }
 
+        public void Cancel()
+        {
+            _cancellationTokenSource.Cancel();
+        }
+
+        public void Dispose()
+        {
+            Cancel();
+        }
     }
 }

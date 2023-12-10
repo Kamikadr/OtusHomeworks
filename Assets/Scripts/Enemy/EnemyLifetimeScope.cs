@@ -8,7 +8,7 @@ namespace ShootEmUp.Enemies
 {
     public class EnemyLifetimeScope: LifetimeScope
     {
-        [SerializeField] private Enemy enemy;
+        [SerializeField] private Transform enemyTransform;
         [SerializeField] private BulletConfig bulletConfig;
         [SerializeField] private float enemyAttackCooldown;
         [SerializeField] private float enemyMoveThreshold;
@@ -23,7 +23,7 @@ namespace ShootEmUp.Enemies
         {
             builder.RegisterComponentInHierarchy<EnemyMoveAgent>()
                 .WithParameter(enemyMoveThreshold)
-                .WithParameter(enemy.transform)
+                .WithParameter(enemyTransform)
                 .AsImplementedInterfaces().AsSelf();
         }
 

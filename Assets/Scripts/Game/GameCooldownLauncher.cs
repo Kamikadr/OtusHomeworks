@@ -1,39 +1,40 @@
 using System;
 using ShootEmUp.Common;
-using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace ShootEmUp.Game
 {
-    public class GameCooldownLauncher: MonoBehaviour
+    public class GameCooldownLauncher: IDisposable
     {
-        [SerializeField] private GameManager gameManager;
-        [FormerlySerializedAs("startTimer")] [SerializeField] private Timer timer;
+        private readonly GameManager _gameManager;
+        private readonly TimerSettings _timerSettings;
+        private readonly float _cooldownTick;
+        private readonly Timer _timer;
+        private readonly StartCountdownObserver _countdownObserver;
+
+        public GameCooldownLauncher(GameManager gameManager, TimerSettings timerSettings)
+        {
+            _gameManager = gameManager;
+            _timerSettings = timerSettings;
+
+            _timer = new Timer();
+            _countdownObserver = new StartCountdownObserver(_timer);
+        }
         
         public void StartGame()
         {
-            timer.OnTimerIsOver += RunGame;
-            timer.StartCountdown();
+            _timer.OnTimerIsOver += RunGame;
+            _timer.StartCountdownAsync(_timerSettings);
         }
         
-
-        public void Pause()
-        {
-            gameManager.PauseGame();
-        }
-
-        public void Resume()
-        {
-            gameManager.ResumeGame();
-        }
         private void RunGame()
         {
-            timer.OnTimerIsOver -= RunGame;
-            gameManager.StartGame();
+            _timer.OnTimerIsOver -= RunGame;
+            _gameManager.StartGame();
         }
-        private void OnDestroy()
+        public void Dispose()
         {
-            timer.OnTimerIsOver -= RunGame;
+            _timer.OnTimerIsOver -= RunGame;
+            _countdownObserver.Dispose();
         }
     }
 }

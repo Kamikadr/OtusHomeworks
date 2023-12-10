@@ -29,4 +29,8 @@ namespace ShootEmUp.Game.Interfaces.GameCycle
     {
         void OnFixedUpdate(float deltaTime);
     }
+    public interface ILateUpdateListener: IGameListener
+    {
+        void OnLateUpdate(float deltaTime);
+    }
 }

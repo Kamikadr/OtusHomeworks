@@ -7,20 +7,24 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemyManager : MonoBehaviour, IGameFinishListener, IGamePauseListener, IGameResumeListener
+    public sealed class EnemyManager : IGameFinishListener, IGamePauseListener, IGameResumeListener
     {
-        
-        [SerializeField] private EnemySpawner enemySpawner;
-        [SerializeField] private int maxEnemyCount;
-        
+        private readonly EnemySpawner _enemySpawner;
+        private readonly int _maxEnemyCount;
         private readonly HashSet<Enemy> _activeEnemies = new();
         private bool _isNeedSpawningEnemies;
         
+        public EnemyManager(EnemySpawner enemySpawner, int maxEnemyCount)
+        {
+            _enemySpawner = enemySpawner;
+            _maxEnemyCount = maxEnemyCount;
+        }
+
         public void SpawnEnemy()
         {
-            if (_activeEnemies.Count < maxEnemyCount)
+            if (_activeEnemies.Count < _maxEnemyCount)
             {
-                var enemy = enemySpawner.SpawnEnemy();
+                var enemy = _enemySpawner.SpawnEnemy();
                 if (_activeEnemies.Add(enemy))
                 {
                     enemy.Activate();
@@ -41,7 +45,7 @@ namespace ShootEmUp.Enemies
         {
             enemy.Deactivate();
             enemy.OnEnemyKilled -= OnDestroyed;
-            enemySpawner.DespawnEnemy(enemy);
+            _enemySpawner.DespawnEnemy(enemy);
         }
 
 

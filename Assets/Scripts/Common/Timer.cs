@@ -44,10 +44,11 @@ namespace ShootEmUp.Common
             var timeLeft = countdown;
             while (timeLeft > tick)
             {
-                await Task.Delay(TimeSpan.FromSeconds(tick), token);
                 LastTimeEvent?.Invoke(timeLeft);
+                await Task.Delay(TimeSpan.FromSeconds(tick), token);
                 timeLeft -= tick;
             }
+            LastTimeEvent?.Invoke(timeLeft);
             await Task.Delay(TimeSpan.FromSeconds(timeLeft), token);
         }
 

@@ -20,8 +20,8 @@ namespace ShootEmUp.Common
         {
             using (LifetimeScope.EnqueueParent(_parentScope))
             {
-                var item = Object.Instantiate(_prefabItem, parent);
-
+                var item = Object.Instantiate(_prefabItem);
+                item.transform.SetParent(parent);
                 return item;
             }
         }

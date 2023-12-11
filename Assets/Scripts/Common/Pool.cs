@@ -1,25 +1,28 @@
 ﻿using System.Collections.Generic;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 using UnityEngine.Serialization;
+using VContainer.Unity;
 
 namespace ShootEmUp.Common
 {
-    public class Pool<T> where T: MonoBehaviour
+    public class Pool<T>: IStartable where T: MonoBehaviour
     {
         private readonly Factory<T> _itemFactory;
         private readonly Transform _poolContainer;
         private readonly Queue<T> _pool = new();
-        private int _defaultItemCount;
+        private readonly int _defaultItemCount;
 
-        public Pool(Factory<T> itemFactory, Transform poolContainer)
+        
+        public Pool(Factory<T> itemFactory, Transform poolContainer, int defaultItemCount)
         {
             _itemFactory = itemFactory;
             _poolContainer = poolContainer;
-        }
-        public void Initialize(int defaultItemCount)
-        {
             _defaultItemCount = defaultItemCount;
-            for (var i = 0; i < defaultItemCount; i++)
+        }
+        void IStartable.Start()
+        {
+            for (var i = 0; i < _defaultItemCount; i++)
             {
                 var newBullet = _itemFactory.Create(_poolContainer);
                 _pool.Enqueue(newBullet);
@@ -48,5 +51,6 @@ namespace ShootEmUp.Common
                 Object.Destroy(item.gameObject);
             }
         }
+        
     }
 }

@@ -97,7 +97,7 @@ namespace ShootEmUp.Bullets
             }, Lifetime.Transient);*/
             builder.RegisterInstance(enemyPrefab);
             builder.Register<Factory<Enemy>>(Lifetime.Singleton).WithParameter(this);
-            builder.Register<Pool<Enemy>>(Lifetime.Singleton).WithParameter(enemyPoolContainer);
+            builder.Register<Pool<Enemy>>(Lifetime.Singleton).WithParameter(enemyPoolContainer).WithParameter(enemyMaxCount).AsImplementedInterfaces().AsSelf();
             builder.RegisterInstance(new EnemyPositions(enemySpawnPositions, enemyFirePositions));
             builder.Register<EnemyCountdownSpawner>(Lifetime.Singleton).WithParameter(enemySpawnDelay)
                 .AsImplementedInterfaces().AsSelf();
@@ -110,7 +110,7 @@ namespace ShootEmUp.Bullets
             builder.RegisterInstance(bulletPrefab);
             //builder.RegisterComponentInNewPrefab(bulletPrefab, Lifetime.Transient);
             builder.Register<Factory<Bullet>>(Lifetime.Singleton);
-            builder.Register<Pool<Bullet>>(Lifetime.Singleton).WithParameter(bulletPoolContainer);
+            builder.Register<Pool<Bullet>>(Lifetime.Singleton).WithParameter(50).WithParameter(bulletPoolContainer).AsImplementedInterfaces().AsSelf();
             builder.Register<BulletSpawnManager>(Lifetime.Singleton)
                 .AsImplementedInterfaces().AsSelf().WithParameter(worldTransform);
             builder.Register<BulletLifecycleController>(Lifetime.Singleton)

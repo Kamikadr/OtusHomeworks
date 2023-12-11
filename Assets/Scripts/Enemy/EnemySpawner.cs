@@ -2,6 +2,7 @@ using ShootEmUp.Characters;
 using ShootEmUp.Common;
 using ShootEmUp.Game;
 using UnityEngine;
+using VContainer.Unity;
 
 namespace ShootEmUp.Enemies
 {
@@ -22,8 +23,6 @@ namespace ShootEmUp.Enemies
             _enemyPool = enemyPool;
             _enemyPositions = enemyPositions;
             _worldTransform = worldTransform;
-            
-            _enemyPool.Initialize(defaultEnemyCount);
         }
 
         public Enemy SpawnEnemy()
@@ -44,5 +43,7 @@ namespace ShootEmUp.Enemies
         {
             _enemyPool.Release(enemy);
         }
+
+        
     }
 }

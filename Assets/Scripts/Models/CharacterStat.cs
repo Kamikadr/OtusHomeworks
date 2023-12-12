@@ -1,6 +1,5 @@
 using System;
 using Sirenix.OdinInspector;
-using UnityEngine;
 
 namespace Lessons.Architecture.PM
 {
@@ -17,8 +16,8 @@ namespace Lessons.Architecture.PM
         [Button]
         public void ChangeValue(int value)
         {
-            this.Value = value;
-            this.OnValueChanged?.Invoke(value);
+            Value = value;
+            OnValueChanged?.Invoke(value);
         }
     }
 }

@@ -4,7 +4,7 @@ using UniRx;
 
 namespace ViewModels
 {
-    public class CharacterProgressBarViewModel: IDisposable
+    public class CharacterProgressBarViewModel:IProgressBarViewModel, IDisposable
     {
         public IReadOnlyReactiveProperty<int> CurrentXp => _currentXp;
         public IReadOnlyReactiveProperty<int> RequiredXp => _requiredXp;
@@ -37,11 +37,5 @@ namespace ViewModels
             _playerLevel.OnExperienceChanged -= OnExperienceChanged;
             _playerLevel.OnLevelUp -= OnLevelUp;
         }
-    }
-
-    public interface IProgressBarViewModel
-    {
-        public IReadOnlyReactiveProperty<int> CurrentXp { get; }
-        public IReadOnlyReactiveProperty<int> RequiredXp { get; }
     }
 }

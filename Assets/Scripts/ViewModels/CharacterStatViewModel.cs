@@ -29,10 +29,4 @@ namespace ViewModels
             _characterStat.OnValueChanged -= OnStatValueChanged;
         }
     }
-
-    public interface ICharacterStatViewModel
-    {
-        public IReadOnlyReactiveProperty<int> Value { get; }
-        public string Name { get; }
-    }
 }

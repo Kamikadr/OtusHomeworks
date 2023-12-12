@@ -39,13 +39,4 @@ namespace ViewModels
             _playerLevel.LevelUp();
         }
     }
-
-    public interface IPopupViewModel
-    {
-        CharacterInfoViewModel CharacterInfoViewModel { get; }
-        UserInfoViewModel UserInfoViewModel { get; }
-        public CharacterProgressBarViewModel CharacterProgressBarViewModel { get; }
-        IReadOnlyReactiveProperty<bool> CanLevelUp { get; }
-        ReactiveCommand LevelUpCommand { get; }
-    }
 }

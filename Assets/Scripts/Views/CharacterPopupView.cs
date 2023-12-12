@@ -8,50 +8,34 @@ using UnityEngine.Serialization;
 
 namespace Views
 {
-    public class CharacterPopupView: MonoBehaviour
+    public class CharacterPopupView: BaseView<IPopupViewModel>
     {
         [SerializeField] private LevelButton levelButton;
         [SerializeField] private Button button;
-        [FormerlySerializedAs("characterInfoView")] [SerializeField] private UserInfoView userInfoView;
+        [SerializeField] private UserInfoView userInfoView;
         [SerializeField] private ProgressBar progressBar;
-        [SerializeField] private CharacterStatView characterStatView;
-
-        private IPopupViewModel _model;
-        private CompositeDisposable _compositeDisposable;
+        [SerializeField] private CharacterInfoView characterInfoView;
+        
 
 
-        public void Initialize(object viewModel)
+        protected override void OnInitialize()
         {
-            if (viewModel is not IPopupViewModel popupViewModel)
-            {
-                throw new Exception("Expected IPopupViewModel");
-            }
-            
-            _model = popupViewModel;
             BindToViewModel();
-            
-            userInfoView.Initialize(popupViewModel.UserInfoViewModel);
-            progressBar.Initialize(popupViewModel.CharacterProgressBarViewModel);
-            characterStatView.Initialize(popupViewModel.CharacterInfoViewModel);
+            userInfoView.Initialize(Model.UserInfoViewModel);
+            progressBar.Initialize(Model.CharacterProgressBarViewModel);
+            characterInfoView.Initialize(Model.CharacterInfoViewModel);
         }
 
         private void BindToViewModel()
         {
-            _compositeDisposable = new CompositeDisposable();
-            _model.CanLevelUp.Subscribe(UpdateLevelButton).AddTo(_compositeDisposable);
-            _model.LevelUpCommand.BindTo(levelButton.Button).AddTo(_compositeDisposable);
+            Model.CanLevelUp.Subscribe(UpdateLevelButton).AddTo(Disposables);
+            Model.LevelUpCommand.BindTo(levelButton.Button).AddTo(Disposables);
         }
 
 
         private void UpdateLevelButton(bool value)
         {
             levelButton.SetInteractable(value);
-        }
-
-        private void OnDestroy()
-        {
-            _compositeDisposable.Dispose();
-            _compositeDisposable = null;
         }
     }
 }

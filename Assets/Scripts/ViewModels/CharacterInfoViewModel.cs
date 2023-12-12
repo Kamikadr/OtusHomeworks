@@ -55,9 +55,4 @@ namespace ViewModels
             }
         }
     }
-
-    public interface ICharacterInfoViewModel
-    {
-        IReadOnlyReactiveCollection<CharacterStatViewModel> CharacterStatViewModels { get; }
-    }
 }

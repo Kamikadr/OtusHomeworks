@@ -57,12 +57,4 @@ namespace ViewModels
             _playerLevel.OnLevelUp -= OnLevelChanged;
         }
     }
-
-    public interface IUserInfoViewModel
-    {
-        public IReadOnlyReactiveProperty<string> Name { get; }
-        public IReadOnlyReactiveProperty<Sprite> Icon { get;  }
-        public IReadOnlyReactiveProperty<string> Description { get; }
-        public IReadOnlyReactiveProperty<int> Level { get; }
-    }
 }

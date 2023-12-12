@@ -6,27 +6,17 @@ using UniRx;
 
 namespace Views
 {
-    public class CharacterInfoView: MonoBehaviour
+    public class CharacterInfoView: BaseView<ICharacterInfoViewModel>
     {
         [SerializeField] private Transform statContainer;
 
         private Dictionary<CharacterStatViewModel, CharacterStatView> _viewCollection;
         private CharacterStatViewFactory _characterStatViewFactory;
-        private ICharacterInfoViewModel _model;
-        private CompositeDisposable _disposable;
 
-        public void Initialize(object obj)
+        protected override void OnInitialize()
         {
-            if (obj is not ICharacterInfoViewModel popupViewModel)
-            {
-                throw new Exception("Expected IPopupViewModel");
-            }
-            
-            _model = popupViewModel;
-
-            _disposable = new CompositeDisposable();
-            _model.CharacterStatViewModels.ObserveAdd().Subscribe(OnItemAdded).AddTo(_disposable);
-            _model.CharacterStatViewModels.ObserveRemove().Subscribe(OnItemRemoved).AddTo(_disposable);
+            Model.CharacterStatViewModels.ObserveAdd().Subscribe(OnItemAdded).AddTo(Disposables);
+            Model.CharacterStatViewModels.ObserveRemove().Subscribe(OnItemRemoved).AddTo(Disposables);
 
         }
         
@@ -40,11 +30,6 @@ namespace Views
         private void OnItemRemoved(CollectionRemoveEvent<CharacterStatViewModel> viewModel)
         {
             Destroy(_viewCollection[viewModel.Value].gameObject);
-        }
-
-        private void OnDestroy()
-        {
-            _disposable.Dispose();
         }
     }
 }

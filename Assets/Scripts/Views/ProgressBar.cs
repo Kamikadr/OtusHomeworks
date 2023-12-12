@@ -8,33 +8,23 @@ using ViewModels;
 
 namespace Views
 {
-    public class ProgressBar: MonoBehaviour
+    public class ProgressBar: BaseView<IProgressBarViewModel>
     {
         [SerializeField] private Slider progressBar;
         [SerializeField] private TMP_Text xpText;
-
-        private IProgressBarViewModel _model;
-        private CompositeDisposable _disposable;
+        
         
         private int _currentXp;
         private int _requiredXp;
-        public void Initialize(object obj)
+        protected override void OnInitialize()
         {
-            if (obj is not IProgressBarViewModel progressBarViewModel)
-            {
-                throw new Exception("Expected CharacterProgressBarViewModel");
-            }
-
-            _model = progressBarViewModel;
             BindToViewModel();
         }
 
         private void BindToViewModel()
         {
-            _disposable = new CompositeDisposable();
-            
-            _model.RequiredXp.Subscribe(OnRequiredXpChange).AddTo(_disposable);
-            _model.CurrentXp.Subscribe(OnCurrentXpChange).AddTo(_disposable);
+            Model.RequiredXp.Subscribe(OnRequiredXpChange).AddTo(Disposables);
+            Model.CurrentXp.Subscribe(OnCurrentXpChange).AddTo(Disposables);
         }
 
         private void OnCurrentXpChange(int newValue)

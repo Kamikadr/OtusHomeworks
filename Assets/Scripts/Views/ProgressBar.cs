@@ -1,7 +1,6 @@
 using DG.Tweening;
 using TMPro;
 using UniRx;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using ViewModels;
@@ -20,16 +19,14 @@ namespace Views
         [SerializeField] private ScaleTweenArgs endScaleTweenArgs;
         [SerializeField] private float countingDuration;
         
-        
         private int _currentXp;
         private int _requiredXp;
         private Sequence _animation;
         protected override void OnInitialize()
         {
             BindToViewModel();
-            
-            currentXpText.text = Model.CurrentXp.Value.ToString();
-            progressBar.value = (float) Model.CurrentXp.Value / _requiredXp;
+
+            SetCurrentXpWithoutAnimation(Model.CurrentXp.Value);
         }
 
         private void BindToViewModel()
@@ -43,6 +40,11 @@ namespace Views
             Animate(_currentXp, newValue);
             _currentXp = newValue;
         }
+        private void OnRequiredXpChange(int newValue)
+        {
+            _requiredXp = newValue;
+            requiredXpText.text = _requiredXp.ToString();
+        }
 
         private void Animate(int oldValue, int newValue)
         {
@@ -50,22 +52,17 @@ namespace Views
 
             _animation = DOTween.Sequence();
             _animation.Append(currentXpText.transform.DOScale(endScaleTweenArgs.Scale, endScaleTweenArgs.Duration));
-            var tweenCounting = DOTween.To(() => oldValue, Setter, newValue, countingDuration);
+            var tweenCounting = DOTween.To(() => oldValue, SetCurrentXpWithoutAnimation, newValue, countingDuration);
             _animation.Append(tweenCounting);
             _animation.Append(currentXpText.transform.DOScale(startScaleTweenArgs.Scale, startScaleTweenArgs.Duration));
             
         }
-
-        private void Setter(int newValue)
+        private void SetCurrentXpWithoutAnimation(int newValue)
         {
             currentXpText.text = newValue.ToString();
             progressBar.value = (float) newValue / _requiredXp;
         }
 
-        private void OnRequiredXpChange(int newValue)
-        {
-            _requiredXp = newValue;
-            requiredXpText.text = _requiredXp.ToString();
-        }
+        
     }
 }

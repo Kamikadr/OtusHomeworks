@@ -8,6 +8,7 @@ namespace ViewModels
     {
         public IReadOnlyReactiveProperty<int> CurrentXp => _currentXp;
         public IReadOnlyReactiveProperty<int> RequiredXp => _requiredXp;
+        
         private readonly ReactiveProperty<int> _currentXp;
         private readonly ReactiveProperty<int> _requiredXp;
         private readonly PlayerLevel _playerLevel;

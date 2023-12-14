@@ -24,7 +24,6 @@ namespace Lessons.Architecture
             _characterPopupViewModel = new PopupViewModel(playerLevel, characterInfo, userInfo);
             _characterPopupView.Initialize(_characterPopupViewModel);
             _characterPopupViewModel.OnPopupHide += OnPopupHide;
-
         }
         private void OnPopupHide()
         {

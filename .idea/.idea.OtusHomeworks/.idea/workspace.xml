@@ -5,23 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c48814f7-87a9-4ccd-8c78-9b85cc5ccad8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/PopupManager.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/PopupManager.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Views/Common/ScaleTweenArgs.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Views/Common/ScaleTweenArgs.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OtusHomeworks/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OtusHomeworks/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.XML" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.XML.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/ProgressBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/ProgressBar.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Installers/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Installers/SceneInstaller.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Models/CharacterStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Models/CharacterStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Models/UserInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Models/UserInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/Interfaces/IPopupViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/Interfaces/IPopupViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterInfoViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterInfoViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterProgressBarViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterProgressBarViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/PopupViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/PopupViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterInfoView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterInfoView.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/BaseView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/BaseView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterPopupView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterPopupView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/ProgressBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/ProgressBar.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/UserInfoView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/UserInfoView.cs" afterDir="false" />
@@ -133,7 +122,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702271302238</updated>
       <workItem from="1702271305096" duration="38834000" />
-      <workItem from="1702535924259" duration="18034000" />
+      <workItem from="1702535924259" duration="19081000" />
     </task>
     <servers />
   </component>

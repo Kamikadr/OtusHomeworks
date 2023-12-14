@@ -18,7 +18,7 @@ namespace Views
         {
             closeButton.onClick.AddListener(Hide);
         }
-        public void Show()
+        private void Show()
         {
             gameObject.SetActive(true);
         }
@@ -33,6 +33,7 @@ namespace Views
             userInfoView.Initialize(Model.UserInfoViewModel);
             progressBar.Initialize(Model.CharacterProgressBarViewModel);
             characterInfoView.Initialize(Model.CharacterInfoViewModel);
+            Show();
         }
 
         private void BindToViewModel()

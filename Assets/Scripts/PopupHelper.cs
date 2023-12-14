@@ -1,8 +1,5 @@
-using System;
 using Lessons.Architecture.PM;
 using UnityEngine;
-using ViewModels;
-using Views;
 using Zenject;
 using CharacterInfo = Lessons.Architecture.PM.CharacterInfo;
 

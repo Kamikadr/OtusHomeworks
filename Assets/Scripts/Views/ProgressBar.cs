@@ -1,44 +1,71 @@
-using System;
+using DG.Tweening;
 using TMPro;
 using UniRx;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 using ViewModels;
+using Sequence = DG.Tweening.Sequence;
 
 namespace Views
 {
     public class ProgressBar: BaseView<IProgressBarViewModel>
     {
         [SerializeField] private Slider progressBar;
-        [SerializeField] private TMP_Text xpText;
+        [SerializeField] private TMP_Text currentXpText;
+        [SerializeField] private TMP_Text requiredXpText;
+        
+        [Header("Animation Settings")]
+        [SerializeField] private ScaleTweenArgs startScaleTweenArgs;
+        [SerializeField] private ScaleTweenArgs endScaleTweenArgs;
+        [SerializeField] private float countingDuration;
         
         
         private int _currentXp;
         private int _requiredXp;
+        private Sequence _animation;
         protected override void OnInitialize()
         {
             BindToViewModel();
+            
+            currentXpText.text = Model.CurrentXp.Value.ToString();
+            progressBar.value = (float) Model.CurrentXp.Value / _requiredXp;
         }
 
         private void BindToViewModel()
         {
             Model.RequiredXp.Subscribe(OnRequiredXpChange).AddTo(Disposables);
-            Model.CurrentXp.Subscribe(OnCurrentXpChange).AddTo(Disposables);
+            Model.CurrentXp.SkipLatestValueOnSubscribe().Subscribe(OnCurrentXpChange).AddTo(Disposables);
         }
 
         private void OnCurrentXpChange(int newValue)
         {
+            Animate(_currentXp, newValue);
             _currentXp = newValue;
-            //need animation
-
-            progressBar.value = (float) _currentXp / _requiredXp;
-
-            xpText.text = $"{_currentXp} / {_requiredXp}";
         }
+
+        private void Animate(int oldValue, int newValue)
+        {
+            _animation?.Kill();
+
+            _animation = DOTween.Sequence();
+            _animation.Append(currentXpText.transform.DOScale(endScaleTweenArgs.Scale, endScaleTweenArgs.Duration));
+            var tweenCounting = DOTween.To(() => oldValue, Setter, newValue, countingDuration);
+            _animation.Append(tweenCounting);
+            _animation.Append(currentXpText.transform.DOScale(startScaleTweenArgs.Scale, startScaleTweenArgs.Duration));
+            
+        }
+
+        private void Setter(int newValue)
+        {
+            currentXpText.text = newValue.ToString();
+            progressBar.value = (float) newValue / _requiredXp;
+        }
+
         private void OnRequiredXpChange(int newValue)
         {
             _requiredXp = newValue;
+            requiredXpText.text = _requiredXp.ToString();
         }
     }
 }

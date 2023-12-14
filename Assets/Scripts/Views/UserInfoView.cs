@@ -22,7 +22,6 @@ namespace Views
 
         private void BindToViewModel()
         {
-
             Model.Description.Subscribe(OnDescriptionChange).AddTo(Disposables);
             Model.Name.Subscribe(OnNameChange).AddTo(Disposables);
             Model.Icon.Subscribe(OnIconChange).AddTo(Disposables);

@@ -9,5 +9,6 @@ namespace ViewModels
         public CharacterProgressBarViewModel CharacterProgressBarViewModel { get; }
         IReadOnlyReactiveProperty<bool> CanLevelUp { get; }
         ReactiveCommand LevelUpCommand { get; }
+        ReactiveCommand HideCommand { get; }
     }
 }

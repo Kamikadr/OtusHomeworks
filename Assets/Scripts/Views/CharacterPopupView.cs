@@ -22,7 +22,7 @@ namespace Views
         {
             gameObject.SetActive(true);
         }
-        public void Hide()
+        private void Hide()
         {
             gameObject.SetActive(false);
         }
@@ -39,6 +39,7 @@ namespace Views
         {
             Model.CanLevelUp.Subscribe(UpdateLevelButton).AddTo(Disposables);
             Model.LevelUpCommand.BindTo(levelButton.Button).AddTo(Disposables);
+            Model.HideCommand.BindTo(closeButton).AddTo(Disposables);
         }
 
 

@@ -19,6 +19,13 @@ namespace Lessons.Architecture.PM
 
         [ShowInInspector, ReadOnly]
         public Sprite Icon { get; private set; }
+        
+        public UserInfo(string name, string desc, Sprite icon)
+        {
+            Name = name;
+            Description = desc;
+            Icon = icon;
+        }
 
         [Button]
         public void ChangeName(string name)

@@ -5,23 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c48814f7-87a9-4ccd-8c78-9b85cc5ccad8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Installers/SceneInstaller.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Installers/SceneInstaller.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/PopupHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/PopupHelper.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/PopupManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/PopupManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Views/Common/ScaleTweenArgs.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Views/Common/ScaleTweenArgs.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.OtusHomeworks/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OtusHomeworks/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/StatItem.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/StatItem.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Models/CharacterInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Models/CharacterInfo.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.XML" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.XML.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Plugins/Demigiant/DOTween/Editor/DOTweenUpgradeManager.dll.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/ProgressBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/ProgressBar.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Installers/SceneInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Installers/SceneInstaller.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Models/CharacterStat.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Models/CharacterStat.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Models/PlayerLevel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Models/PlayerLevel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Models/UserInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Models/UserInfo.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterStatViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterStatViewModel.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/PopupHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/PopupHelper.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/Interfaces/IPopupViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/Interfaces/IPopupViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/PopupViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/PopupViewModel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/ViewModels/UserInfoViewModel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/ViewModels/UserInfoViewModel.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterInfoView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterInfoView.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterPopupView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/CharacterPopupView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/Common/ViewPool.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/Common/ViewPool.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/ProgressBar.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/ProgressBar.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Views/UserInfoView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Views/UserInfoView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,25 +66,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "XThreadsFramesViewSplitterKey": "0.5009597",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
   },
-  &quot;keyToStringList&quot;: {
-    &quot;rider.external.source.directories&quot;: [
-      &quot;C:\\Users\\atd6\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache&quot;,
-      &quot;C:\\Users\\atd6\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache&quot;,
-      &quot;C:\\Users\\atd6\\AppData\\Local\\Symbols\\src&quot;
+  "keyToStringList": {
+    "rider.external.source.directories": [
+      "C:\\Users\\atd6\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\DecompilerCache",
+      "C:\\Users\\atd6\\AppData\\Roaming\\JetBrains\\Rider2023.1\\resharper-host\\SourcesCache",
+      "C:\\Users\\atd6\\AppData\\Local\\Symbols\\src"
     ]
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="D:\Unity\Editor\2021.3.7f1\Editor\Unity.exe" />
@@ -129,7 +133,7 @@
       <option name="presentableId" value="Default" />
       <updated>1702271302238</updated>
       <workItem from="1702271305096" duration="38834000" />
-      <workItem from="1702535924259" duration="10044000" />
+      <workItem from="1702535924259" duration="18034000" />
     </task>
     <servers />
   </component>
@@ -155,32 +159,6 @@
           <line>19</line>
           <properties documentPath="D:\Projects\OtusHomeworks\Assets\Scripts\Components\MoveRigidbodyComponent.cs" initialLine="19" containingFunctionPresentation="Method 'OnFixedUpdate'" />
           <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterInfoViewModel.cs</url>
-          <line>46</line>
-          <properties documentPath="D:\Projects\OtusHomeworks\Assets\Scripts\ViewModels\CharacterInfoViewModel.cs" initialLine="46" containingFunctionPresentation="Method 'AddStat'">
-            <startOffsets>
-              <option value="1510" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1562" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/ViewModels/CharacterInfoViewModel.cs</url>
-          <line>33</line>
-          <properties documentPath="D:\Projects\OtusHomeworks\Assets\Scripts\ViewModels\CharacterInfoViewModel.cs" initialLine="33" containingFunctionPresentation="Method 'RemoveStat'">
-            <startOffsets>
-              <option value="1098" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1170" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
           <url>file://$PROJECT_DIR$/Assets/Scripts/Models/CharacterInfo.cs</url>

@@ -11,9 +11,10 @@ namespace Views
         private int _defaultItemCount;
         private readonly Queue<T> _pool = new();
 
-        public ViewPool(ViewFactory<T> factory)
+        public ViewPool(ViewFactory<T> factory, Transform poolContainer)
         {
             _factory = factory;
+            _poolContainer = poolContainer;
         }
 
         public void Initialize(int itemCount)

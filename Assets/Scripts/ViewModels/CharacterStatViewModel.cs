@@ -9,7 +9,7 @@ namespace ViewModels
         public IReadOnlyReactiveProperty<int> Value => _value;
         public string Name { get; }
 
-        private ReactiveProperty<int> _value;
+        private readonly ReactiveProperty<int> _value;
         private readonly CharacterStat _characterStat;
         
         public CharacterStatViewModel(CharacterStat characterStat)
@@ -17,6 +17,8 @@ namespace ViewModels
             _characterStat = characterStat;
             Name = _characterStat.Name;
             _characterStat.OnValueChanged += OnStatValueChanged;
+
+            _value = new ReactiveProperty<int>(_characterStat.Value);
         }
 
         private void OnStatValueChanged(int newValue)

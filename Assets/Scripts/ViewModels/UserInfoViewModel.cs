@@ -14,10 +14,10 @@ namespace ViewModels
         
         private readonly PlayerLevel _playerLevel;
         private readonly UserInfo _userInfo;
-        private ReactiveProperty<string> _name;
-        private ReactiveProperty<Sprite> _icon;
-        private ReactiveProperty<string> _description;
-        private ReactiveProperty<int> _level;
+        private readonly ReactiveProperty<string> _name;
+        private readonly ReactiveProperty<Sprite> _icon;
+        private readonly ReactiveProperty<string> _description;
+        private readonly ReactiveProperty<int> _level;
 
         public UserInfoViewModel(PlayerLevel playerLevel, UserInfo userInfo)
         {
@@ -27,6 +27,11 @@ namespace ViewModels
             _userInfo.OnIconChanged += OnIconChanged;
             _userInfo.OnNameChanged += OnNameChanged;
             _playerLevel.OnLevelUp += OnLevelChanged;
+
+            _name = new ReactiveProperty<string>(_userInfo.Name);
+            _description = new ReactiveProperty<string>(_userInfo.Description);
+            _icon = new ReactiveProperty<Sprite>(_userInfo.Icon);
+            _level = new ReactiveProperty<int>(_playerLevel.CurrentLevel);
         }
 
         private void OnLevelChanged()

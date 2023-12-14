@@ -1,22 +1,31 @@
-using System;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using ViewModels;
 using UniRx;
-using UnityEngine.Serialization;
 
 namespace Views
 {
     public class CharacterPopupView: BaseView<IPopupViewModel>
     {
         [SerializeField] private LevelButton levelButton;
-        [SerializeField] private Button button;
+        [SerializeField] private Button closeButton;
         [SerializeField] private UserInfoView userInfoView;
         [SerializeField] private ProgressBar progressBar;
         [SerializeField] private CharacterInfoView characterInfoView;
-        
 
+        private void OnEnable()
+        {
+            closeButton.onClick.AddListener(Hide);
+        }
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
+        public void Hide()
+        {
+            gameObject.SetActive(false);
+        }
 
         protected override void OnInitialize()
         {
@@ -36,6 +45,11 @@ namespace Views
         private void UpdateLevelButton(bool value)
         {
             levelButton.SetInteractable(value);
+        }
+        
+        private void OnDisable()
+        {
+            closeButton.onClick.RemoveListener(Hide);
         }
     }
 }

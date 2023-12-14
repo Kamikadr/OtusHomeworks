@@ -5,6 +5,7 @@ using ViewModels;
 
 namespace Views
 {
+
     public abstract class BaseView<T>: MonoBehaviour, IDisposable where T: IViewModel
     {
         protected CompositeDisposable Disposables;

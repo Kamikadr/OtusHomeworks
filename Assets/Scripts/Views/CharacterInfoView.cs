@@ -11,25 +11,27 @@ namespace Views
         [SerializeField] private Transform statContainer;
 
         private Dictionary<CharacterStatViewModel, CharacterStatView> _viewCollection;
-        private CharacterStatViewFactory _characterStatViewFactory;
+        private ViewPool<CharacterStatView> _viewFactory;
 
         protected override void OnInitialize()
         {
             Model.CharacterStatViewModels.ObserveAdd().Subscribe(OnItemAdded).AddTo(Disposables);
             Model.CharacterStatViewModels.ObserveRemove().Subscribe(OnItemRemoved).AddTo(Disposables);
-
         }
         
         private void OnItemAdded(CollectionAddEvent<CharacterStatViewModel> viewModel)
         {
-            var newStatView = _characterStatViewFactory.Create(statContainer);
+            var newStatView = _viewFactory.Get(statContainer);
             newStatView.Initialize(viewModel.Value);
             
             _viewCollection.Add(viewModel.Value, newStatView);
         }
         private void OnItemRemoved(CollectionRemoveEvent<CharacterStatViewModel> viewModel)
         {
-            Destroy(_viewCollection[viewModel.Value].gameObject);
+            if (_viewCollection.Remove(viewModel.Value, out var value))
+            {
+                _viewFactory.Release(value);
+            }
         }
     }
 }

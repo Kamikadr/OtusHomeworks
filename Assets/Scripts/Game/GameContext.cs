@@ -60,30 +60,30 @@ namespace ShootEmUp.Game
         }
         public void Finish()
         {
-            foreach (var startListener in _gameFinishListeners)
+            foreach (var finishListener in _gameFinishListeners)
             {
-                startListener.OnFinish();
+                finishListener.OnFinish();
             }
         }
         public void Pause()
         {
-            foreach (var startListener in _gamePauseListeners)
+            foreach (var pauseListener in _gamePauseListeners)
             {
-                startListener.OnPause();
+                pauseListener.OnPause();
             }
         }
         public void Resume()
         {
-            foreach (var startListener in _gameResumeListeners)
+            foreach (var resumeListener in _gameResumeListeners)
             {
-                startListener.OnResume();
+                resumeListener.OnResume();
             }
         }
         public void Update(float deltaTime)
         {
-            foreach (var startListener in _gameUpdateListeners)
+            foreach (var updateListener in _gameUpdateListeners)
             {
-                startListener.OnUpdate(deltaTime);
+                updateListener.OnUpdate(deltaTime);
             }
 
             foreach (var dynamicUpdateListener in _dynamicUpdateListeners)
@@ -93,9 +93,9 @@ namespace ShootEmUp.Game
         }
         public void FixedUpdate(float deltaTime)
         {
-            foreach (var startListener in _gameFixedUpdateListeners)
+            foreach (var fixedUpdateListener in _gameFixedUpdateListeners)
             {
-                startListener.OnFixedUpdate(deltaTime);
+                fixedUpdateListener.OnFixedUpdate(deltaTime);
             }
             foreach (var dynamicUpdateListener in _dynamicFixedUpdateListeners)
             {
@@ -104,9 +104,9 @@ namespace ShootEmUp.Game
         }
         public void LateUpdate(float deltaTime)
         {
-            foreach (var startListener in _gameLateUpdateListeners)
+            foreach (var lateUpdateListener in _gameLateUpdateListeners)
             {
-                startListener.OnLateUpdate(deltaTime);
+                lateUpdateListener.OnLateUpdate(deltaTime);
             }
         }
 

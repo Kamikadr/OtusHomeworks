@@ -26,7 +26,6 @@ namespace ShootEmUp.Enemies
             _enemyAttackAgent = enemyAttackAgent;
             _enemyMoveAgent = enemyMoveAgent;
             _hitPointsComponent = hitPointsComponent;
-
             _enemyActionController = new EnemyActionController(_enemyMoveAgent, _enemyAttackController);
         }
         public void Activate()
@@ -75,10 +74,6 @@ namespace ShootEmUp.Enemies
         {
             _enemyMoveAgent.SetDestination(endPoint);
         }
-
-        public void UpdateEnemy(float deltaTime)
-        {
-            _enemyMoveAgent.UpdateMove(deltaTime);
-        }
+        
     }
 }

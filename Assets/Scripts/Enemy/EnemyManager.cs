@@ -7,7 +7,7 @@ using UnityEngine.Serialization;
 
 namespace ShootEmUp.Enemies
 {
-    public sealed class EnemyManager : IGameFinishListener, IGamePauseListener, IGameResumeListener, IFixedUpdateListener
+    public sealed class EnemyManager : IGameFinishListener, IGamePauseListener, IGameResumeListener
     {
         private readonly EnemySpawner _enemySpawner;
         private readonly int _maxEnemyCount;
@@ -73,13 +73,6 @@ namespace ShootEmUp.Enemies
                 enemy.Resume();
             }
         }
-
-        public void OnFixedUpdate(float deltaTime)
-        {
-            foreach (var enemy in _activeEnemies)
-            {
-                enemy.UpdateEnemy(deltaTime);
-            }
-        }
+        
     }
 }

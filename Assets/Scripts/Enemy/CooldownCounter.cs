@@ -1,17 +1,20 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+using ShootEmUp.Game;
+using ShootEmUp.Game.Interfaces.GameCycle;
 
 namespace ShootEmUp.Enemies
 {
-    public class CooldownCounter: IDisposable
+    public class CooldownCounter: IUpdateListener, IDisposable
     {
+        private readonly GameContext _gameContext;
         private readonly float _countdown;
-        private CancellationTokenSource _cancellationTokenSource;
+        private float _currentTime;
         private bool _needCount;
 
-        public CooldownCounter(float enemyCooldown)
+        public CooldownCounter(GameContext gameContext ,float enemyCooldown)
         {
+            gameContext.AddListener(this);
+            _gameContext = gameContext;
             _countdown = enemyCooldown;
         }
         public event Action CountIsDownEvent;
@@ -19,37 +22,26 @@ namespace ShootEmUp.Enemies
         public void SetActive(bool value)
         {
             _needCount = value;
-            if (value)
-            {
-                _cancellationTokenSource = new CancellationTokenSource();
-                CooldownTask(_cancellationTokenSource.Token);
-            }
-            else
-            {
-                _cancellationTokenSource?.Cancel();
-            }
         }
-
-        private async Task CooldownTask(CancellationToken token = default)
+        public void OnUpdate(float deltaTime)
         {
-            try
+            if (!_needCount)
             {
-                while (_needCount)
-                {
-                    await Task.Delay(TimeSpan.FromSeconds(_countdown), token);
-                    CountIsDownEvent?.Invoke();
-                }
+                return;
             }
-            finally
+            
+            _currentTime -= deltaTime;
+            
+            if (_currentTime <= 0)
             {
-                _cancellationTokenSource.Dispose();
-                _cancellationTokenSource = null;
+                CountIsDownEvent?.Invoke();
+                _currentTime += _countdown;
             }
         }
 
         public void Dispose()
         {
-            _cancellationTokenSource?.Cancel();
+            _gameContext.RemoveListener(this);
         }
     }
 }

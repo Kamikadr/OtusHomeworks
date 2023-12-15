@@ -1,10 +1,12 @@
 using System;
 using ShootEmUp.Componets;
+using ShootEmUp.Game;
+using ShootEmUp.Game.Interfaces.GameCycle;
 using UnityEngine;
 
 namespace ShootEmUp
 {
-    public sealed class EnemyMoveAgent
+    public sealed class EnemyMoveAgent: IFixedUpdateListener, IDisposable
     {
         private readonly MoveComponent _moveComponent;
         private readonly Transform _enemyTransform;
@@ -12,15 +14,19 @@ namespace ShootEmUp
         
         private Vector2 _destination;
         private bool _isReached;
-        
-        
+        private readonly GameContext _gameContext;
+
+
         public event Action<bool> IsReachedChange;
 
-        public EnemyMoveAgent(MoveComponent moveComponent,Transform enemyTransform, float moveThreshold = 0.25f)
+        public EnemyMoveAgent(GameContext gameContext, MoveComponent moveComponent,Transform enemyTransform, float moveThreshold = 0.25f)
         {
             _moveThreshold = moveThreshold;
             _moveComponent = moveComponent;
             _enemyTransform = enemyTransform;
+            _gameContext = gameContext;
+            _gameContext.AddListener(this);
+            _moveThreshold = moveThreshold;
         }
 
         public void SetDestination(Vector2 endPoint)
@@ -30,7 +36,7 @@ namespace ShootEmUp
             IsReachedChange?.Invoke(_isReached);
         }
 
-        public void UpdateMove(float deltaTime)
+        public void OnFixedUpdate(float deltaTime)
         {
             if (_isReached)
             {
@@ -48,6 +54,11 @@ namespace ShootEmUp
 
             var direction = vector.normalized;
             _moveComponent.Move(direction, deltaTime);
+        }
+
+        public void Dispose()
+        {
+            _gameContext.RemoveListener(this);
         }
     }
 }

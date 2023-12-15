@@ -14,6 +14,9 @@ namespace ShootEmUp.Game
         private readonly IEnumerable<IFixedUpdateListener> _gameFixedUpdateListeners;
         private readonly IEnumerable<ILateUpdateListener> _gameLateUpdateListeners;
 
+        private List<IUpdateListener> _dynamicUpdateListeners = new();
+        private List<IFixedUpdateListener> _dynamicFixedUpdateListeners = new();
+
         public GameContext(IEnumerable<IGameStartListener> gameStartListeners,
             IEnumerable<IGameFinishListener> gameFinishListeners,
             IEnumerable<IGamePauseListener> gamePauseListeners,
@@ -30,7 +33,23 @@ namespace ShootEmUp.Game
             _gameFixedUpdateListeners = gameFixedUpdateListeners;
             _gameLateUpdateListeners = gameLateUpdateListeners;
         }
-        
+
+        public void AddListener(IUpdateListener listener)
+        {
+            _dynamicUpdateListeners.Add(listener);
+        }
+        public void AddListener(IFixedUpdateListener listener)
+        {
+            _dynamicFixedUpdateListeners.Add(listener);
+        }
+        public void RemoveListener(IUpdateListener listener)
+        {
+            _dynamicUpdateListeners.Remove(listener);
+        }
+        public void RemoveListener(IFixedUpdateListener listener)
+        {
+            _dynamicFixedUpdateListeners.Remove(listener);
+        }
         
         public void Start()
         {
@@ -66,12 +85,21 @@ namespace ShootEmUp.Game
             {
                 startListener.OnUpdate(deltaTime);
             }
+
+            foreach (var dynamicUpdateListener in _dynamicUpdateListeners)
+            {
+                dynamicUpdateListener.OnUpdate(deltaTime);
+            }
         }
         public void FixedUpdate(float deltaTime)
         {
             foreach (var startListener in _gameFixedUpdateListeners)
             {
                 startListener.OnFixedUpdate(deltaTime);
+            }
+            foreach (var dynamicUpdateListener in _dynamicFixedUpdateListeners)
+            {
+                dynamicUpdateListener.OnFixedUpdate(deltaTime);
             }
         }
         public void LateUpdate(float deltaTime)

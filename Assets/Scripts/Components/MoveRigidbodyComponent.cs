@@ -12,13 +12,9 @@ namespace ShootEmUp.Componets
         
         public override void Move(Vector2 vector, float deltaTime)
         {
-            _destination = vector;
-        }
-
-        private void FixedUpdate()
-        {
-            var nextPosition = rigidbody2D.position + _destination * (Time.deltaTime * speed);
+            var nextPosition = rigidbody2D.position + vector * (deltaTime * speed);
             rigidbody2D.MovePosition(nextPosition);
         }
+        
     }
 }

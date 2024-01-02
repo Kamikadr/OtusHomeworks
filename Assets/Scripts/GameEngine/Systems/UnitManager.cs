@@ -16,6 +16,8 @@ namespace GameEngine
         [ShowInInspector, ReadOnly]
         private HashSet<Unit> sceneUnits = new();
 
+        private readonly UnitFactory _unitFactory;
+
         public UnitManager()
         {
         }
@@ -27,7 +29,7 @@ namespace GameEngine
         
         public void SetupUnits(IEnumerable<Unit> units)
         {
-            this.sceneUnits = new HashSet<Unit>(units);
+            sceneUnits = new HashSet<Unit>(units);
         }
 
         public void SetContainer(Transform container)
@@ -38,15 +40,15 @@ namespace GameEngine
         [Button]
         public Unit SpawnUnit(Unit prefab, Vector3 position, Quaternion rotation)
         {
-            var unit = Object.Instantiate(prefab, position, rotation, this.container);
-            this.sceneUnits.Add(unit);
+            var unit = Object.Instantiate(prefab, position, rotation, container);
+            sceneUnits.Add(unit);
             return unit;
         }
 
         [Button]
         public void DestroyUnit(Unit unit)
         {
-            if (this.sceneUnits.Remove(unit))
+            if (sceneUnits.Remove(unit))
             {
                 Object.Destroy(unit.gameObject);
             }
@@ -54,7 +56,13 @@ namespace GameEngine
 
         public IEnumerable<Unit> GetAllUnits()
         {
-            return this.sceneUnits;
+            return sceneUnits;
+        }
+
+        public void SetupUnit(UnitSnapshot unitSnapshot)
+        {
+            var unit =_unitFactory.Create(unitSnapshot.Type, container);
+            unit.SetSnapshot(unitSnapshot);
         }
     }
 }

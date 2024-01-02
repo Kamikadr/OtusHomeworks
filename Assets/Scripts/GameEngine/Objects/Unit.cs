@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GameEngine
 {
     //Нельзя менять!
-    public sealed class Unit : MonoBehaviour
+    public sealed class Unit : MonoBehaviour, ISaveable<UnitSnapshot>
     {
         public string Type
         {
@@ -36,6 +36,25 @@ namespace GameEngine
         {
             this.type = this.name;
             this.hitPoints = 10;
+        }
+
+        public void SetSnapshot(UnitSnapshot snapshot)
+        {
+            type = snapshot.Type;
+            hitPoints = snapshot.HitPoints;
+            transform.eulerAngles = snapshot.Rotation;
+            transform.position = snapshot.Position;
+        }
+
+        public UnitSnapshot GetSnapshot()
+        {
+            return new UnitSnapshot
+            {
+                Type = Type,
+                HitPoints = HitPoints,
+                Position = Position,
+                Rotation = Rotation
+            };
         }
     }
 }

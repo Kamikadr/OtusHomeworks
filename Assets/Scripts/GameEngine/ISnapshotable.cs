@@ -1,6 +1,6 @@
 namespace GameEngine
 {
-    public interface ISaveable<T>
+    public interface ISnapshotable<T>
     {
         void SetSnapshot(T snapshot);
         T GetSnapshot();

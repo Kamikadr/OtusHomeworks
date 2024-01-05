@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 774778270f9155140a046853827c3e18, type: 3}
   m_Name: UnitCatalog
   m_EditorClassIdentifier: 
-  unitConfigs: []
+  unitConfigs:
+  - {fileID: 11400000, guid: 25434fa36e5d97644b4ddc1655cb85bd, type: 2}
+  - {fileID: 11400000, guid: e20556169074b854a964d21004371bf7, type: 2}
+  - {fileID: 11400000, guid: 222abccc73ac0e8459db1aab68e28c26, type: 2}
+  - {fileID: 11400000, guid: 2ef2593893e0e154b9610dbdc67ac593, type: 2}
+  - {fileID: 11400000, guid: 8b117d70ad41e6a44a62c20b816c6d9f, type: 2}

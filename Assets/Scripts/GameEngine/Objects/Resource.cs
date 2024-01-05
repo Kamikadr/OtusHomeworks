@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GameEngine
 {
     //Нельзя менять!
-    public sealed class Resource : MonoBehaviour, ISaveable<ResourceSnapshot>
+    public sealed class Resource : MonoBehaviour, ISnapshotable<ResourceSnapshot>
     {
         public string ID
         {
@@ -31,7 +31,8 @@ namespace GameEngine
         {
             return new ResourceSnapshot
             {
-                Amount = Amount
+                Amount = Amount,
+                Id = ID
             };
         }
     }

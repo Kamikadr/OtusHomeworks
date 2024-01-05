@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b82a8e8bce94f87b70efb1b56ba32f6, type: 3}
-  m_Name: new Load Task
+  m_Script: {fileID: 11500000, guid: e606da4c3411469096852964b871a9c5, type: 3}
+  m_Name: "Task \xABSetup Resource Service\xBB"
   m_EditorClassIdentifier: 

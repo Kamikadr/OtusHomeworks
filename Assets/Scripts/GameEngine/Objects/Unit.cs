@@ -1,9 +1,10 @@
+using Common.Extensions;
 using UnityEngine;
 
 namespace GameEngine
 {
     //Нельзя менять!
-    public sealed class Unit : MonoBehaviour, ISaveable<UnitSnapshot>
+    public sealed class Unit : MonoBehaviour, ISnapshotable<UnitSnapshot>
     {
         public string Type
         {
@@ -18,12 +19,12 @@ namespace GameEngine
 
         public Vector3 Position
         {
-            get => this.transform.position;
+            get => transform.position;
         }
         
         public Vector3 Rotation
         {
-            get => this.transform.eulerAngles;
+            get => transform.eulerAngles;
         }
 
         [SerializeField]
@@ -34,16 +35,16 @@ namespace GameEngine
 
         private void Reset()
         {
-            this.type = this.name;
-            this.hitPoints = 10;
+            type = name;
+            hitPoints = 10;
         }
 
         public void SetSnapshot(UnitSnapshot snapshot)
         {
             type = snapshot.Type;
             hitPoints = snapshot.HitPoints;
-            transform.eulerAngles = snapshot.Rotation;
-            transform.position = snapshot.Position;
+            transform.eulerAngles = snapshot.Rotation.ConvertToVector3();
+            transform.position = snapshot.Position.ConvertToVector3();
         }
 
         public UnitSnapshot GetSnapshot()
@@ -52,8 +53,8 @@ namespace GameEngine
             {
                 Type = Type,
                 HitPoints = HitPoints,
-                Position = Position,
-                Rotation = Rotation
+                Position = Position.ConvertToSerializableVector3(),
+                Rotation = Rotation.ConvertToSerializableVector3()
             };
         }
     }

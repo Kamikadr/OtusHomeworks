@@ -1,20 +1,27 @@
+using DefaultNamespace;
 using Zenject;
 
 namespace SaveSystem
 {
     public abstract class SaveLoader<TData, TService>: ISaveLoader
     {
-        
-        public void SaveData(GameRepository gameRepository, DiContainer container)
+        private readonly GameFacade _gameFacade;
+
+        protected SaveLoader(GameFacade gameFacade)
         {
-            var resourceService = container.Resolve<TService>();
+            _gameFacade = gameFacade;
+        }
+
+        public void SaveData(GameRepository gameRepository)
+        {
+            var resourceService = _gameFacade.GetService<TService>();
             var data = ConvertToData(resourceService);
             gameRepository.SetData(data);
         }
 
-        public void LoadData(GameRepository gameRepository, DiContainer container)
+        public void LoadData(GameRepository gameRepository)
         {
-            var resourceService = container.Resolve<TService>();
+            var resourceService = _gameFacade.GetService<TService>();
             if (gameRepository.TryGetData<TData>(out var snapshots))
             {
                 SetupData(resourceService, snapshots);

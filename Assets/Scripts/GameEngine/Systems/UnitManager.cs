@@ -18,14 +18,12 @@ namespace GameEngine
 
         private readonly UnitFactory _unitFactory;
 
-        public UnitManager()
+        public UnitManager(UnitFactory unitFactory, Transform container)
         {
-        }
-
-        public UnitManager(Transform container)
-        {
+            _unitFactory = unitFactory;
             this.container = container;
         }
+        
         
         public void SetupUnits(IEnumerable<Unit> units)
         {

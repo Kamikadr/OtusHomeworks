@@ -1,3 +1,4 @@
+using Common.Extensions;
 using UnityEngine;
 
 namespace GameEngine
@@ -6,7 +7,7 @@ namespace GameEngine
     {
         public string Type;
         public int HitPoints;
-        public Vector3 Position;
-        public Vector3 Rotation;
+        public SerializableVector3 Position;
+        public SerializableVector3 Rotation;
     }
 }

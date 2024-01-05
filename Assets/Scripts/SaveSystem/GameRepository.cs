@@ -6,12 +6,12 @@ namespace SaveSystem
 {
     public class GameRepository: IGameRepository
     {
-        private Dictionary<string, string> _dataCollection;
+        private Dictionary<string, string> _dataCollection = new();
 
 
         public bool TryGetData<T>(out T value)
         {
-            var dataKey = nameof(T);
+            var dataKey = typeof(T).Name;
             if (_dataCollection.TryGetValue(dataKey, out var valueData))
             {
                 value = JsonConvert.DeserializeObject<T>(valueData);
@@ -27,13 +27,16 @@ namespace SaveSystem
             var dataKey = typeof(T).Name;
             var rawData = JsonConvert.SerializeObject(value);
             
-            _dataCollection.Add(dataKey, rawData);
+            _dataCollection[dataKey] = rawData;
         }
 
         public void LoadState()
         {
-            var rawDataCollection = PlayerPrefs.GetString("save");
-            _dataCollection = JsonConvert.DeserializeObject<Dictionary<string,string>>(rawDataCollection);
+            if (PlayerPrefs.HasKey("save"))
+            {
+                var rawDataCollection = PlayerPrefs.GetString("save");
+                _dataCollection = JsonConvert.DeserializeObject<Dictionary<string,string>>(rawDataCollection);
+            }
         }
 
         public void SaveState()

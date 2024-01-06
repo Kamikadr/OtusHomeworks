@@ -9,10 +9,10 @@ namespace Tasks.LoadingTasks
     [CreateAssetMenu(menuName = "Loading Tasks/LoadRepositoryTask", fileName = "LoadRepositoryTask")]
     public class LoadRepositoryTask: LoadingTask
     {
-        private GameRepository _gameRepository;
+        private IGameRepository _gameRepository;
         
         [Inject]
-        private void Construct(GameRepository gameRepository)
+        private void Construct(IGameRepository gameRepository)
         {
             _gameRepository = gameRepository;
         }

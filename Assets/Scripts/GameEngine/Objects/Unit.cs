@@ -1,4 +1,7 @@
+using System;
 using Common.Extensions;
+using Sirenix.OdinInspector;
+using Unity.Collections;
 using UnityEngine;
 
 namespace GameEngine
@@ -6,6 +9,10 @@ namespace GameEngine
     //Нельзя менять!
     public sealed class Unit : MonoBehaviour, ISnapshotable<UnitSnapshot>
     {
+        public Guid Id
+        {
+            get => id;
+        }
         public string Type
         {
             get => type;
@@ -27,11 +34,9 @@ namespace GameEngine
             get => transform.eulerAngles;
         }
 
-        [SerializeField]
-        private string type;
-        
-        [SerializeField]
-        private int hitPoints;
+        private Guid id;
+        [SerializeField] private string type;
+        [SerializeField] private int hitPoints;
 
         private void Reset()
         {
@@ -39,6 +44,10 @@ namespace GameEngine
             hitPoints = 10;
         }
 
+        public void SetUnitId(Guid unitId)
+        {
+            id = unitId;
+        }
         public void SetSnapshot(UnitSnapshot snapshot)
         {
             type = snapshot.Type;

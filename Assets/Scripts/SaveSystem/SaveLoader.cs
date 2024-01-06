@@ -12,14 +12,14 @@ namespace SaveSystem
             _gameFacade = gameFacade;
         }
 
-        public void SaveData(GameRepository gameRepository)
+        public void SaveData(IGameRepository gameRepository)
         {
             var resourceService = _gameFacade.GetService<TService>();
             var data = ConvertToData(resourceService);
             gameRepository.SetData(data);
         }
 
-        public void LoadData(GameRepository gameRepository)
+        public void LoadData(IGameRepository gameRepository)
         {
             var resourceService = _gameFacade.GetService<TService>();
             if (gameRepository.TryGetData<TData>(out var snapshots))

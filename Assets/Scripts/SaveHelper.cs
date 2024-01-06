@@ -7,10 +7,10 @@ using Zenject;
 public sealed class SaveHelper : MonoBehaviour
 {
     private IEnumerable<ISaveLoader> _saveLoaders;
-    private GameRepository _gameRepository;
+    private IGameRepository _gameRepository;
     private GameSaver _gameSaver;
     [Inject]
-    private void Construct(IEnumerable<ISaveLoader> saveLoaders, GameRepository gameRepository, GameSaver gameSaver)
+    private void Construct(IEnumerable<ISaveLoader> saveLoaders, IGameRepository gameRepository, GameSaver gameSaver)
     {
         _saveLoaders = saveLoaders;
         _gameRepository = gameRepository;

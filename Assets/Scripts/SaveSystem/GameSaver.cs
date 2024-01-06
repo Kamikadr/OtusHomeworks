@@ -2,9 +2,9 @@ namespace SaveSystem
 {
     public class GameSaver  
     {
-        private readonly GameRepository _gameRepository;
+        private readonly IGameRepository _gameRepository;
 
-        public GameSaver(GameRepository gameRepository)
+        public GameSaver(IGameRepository gameRepository)
         {
             _gameRepository = gameRepository;
         }

@@ -18,10 +18,7 @@ namespace SaveSystem
 
         protected override void SetupData(UnitManager service, UnitSnapshot[] data)
         {
-            foreach (var unitSnapshot in data)
-            {
-                service.SetupUnit(unitSnapshot);
-            }
+            service.SetupUnits(data);
         }
     }
     

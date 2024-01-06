@@ -12,10 +12,10 @@ namespace Tasks
     public class LoadDataTask: LoadingTask
     {
         private IEnumerable<ISaveLoader> _saveLoaders;
-        private GameRepository _gameRepository;
+        private IGameRepository _gameRepository;
         
         [Inject]
-        private void Construct(IEnumerable<ISaveLoader> saveLoaders, GameRepository gameRepository)
+        private void Construct(IEnumerable<ISaveLoader> saveLoaders, IGameRepository gameRepository)
         {
             _saveLoaders = saveLoaders;
             _gameRepository = gameRepository;

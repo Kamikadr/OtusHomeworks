@@ -4,7 +4,7 @@ using Zenject;
 
 namespace App.SaveSystem
 {
-    public class UnitSaveLoader: SaveLoader<UnitSnapshot[], UnitManager>
+    public sealed class UnitSaveLoader: SaveLoader<UnitSnapshot[], UnitManager>
     {
         [Inject]
         public UnitSaveLoader(GameFacade gameFacade) : base(gameFacade)

@@ -7,7 +7,7 @@ using Zenject;
 namespace App.GameTasks
 {
     [CreateAssetMenu(menuName = "Loading Tasks/SaveLoadTask", fileName = "Save Load Task")]
-    public class LoadDataTask: LoadingTask
+    public sealed class LoadDataTask: LoadingTask
     {
         private IEnumerable<ISaveLoader> _saveLoaders;
         private IGameRepository _gameRepository;

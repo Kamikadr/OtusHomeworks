@@ -3,7 +3,7 @@ using UnityEngine;
 namespace GameEngine
 {
     [CreateAssetMenu(menuName = "UnitCatalog", fileName = "NewUnitCatalog")]
-    public class UnitCatalog : ScriptableObject
+    public sealed class UnitCatalog : ScriptableObject
     {
         [SerializeField] public UnitConfig[] unitConfigs;
 

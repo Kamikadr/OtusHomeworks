@@ -6,7 +6,7 @@ using Zenject;
 
 namespace App
 {
-    public class GameWrapper: MonoBehaviour
+    public sealed class GameWrapper: MonoBehaviour
     {
         private DiContainer _gameContainer;
 

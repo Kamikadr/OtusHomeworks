@@ -6,7 +6,7 @@ using Cysharp.Threading.Tasks;
 
 namespace App
 {
-    public class GameRepository: IGameRepository
+    public sealed class GameRepository: IGameRepository
     {
         private readonly FileEncryptor _fileEncryptor;
         private Dictionary<string, string> _dataCollection = new();

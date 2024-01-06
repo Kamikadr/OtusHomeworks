@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Zenject
 {
-    public class GameSceneInstaller: MonoInstaller
+    public sealed class GameSceneInstaller: MonoInstaller
     {
         [SerializeField] private Transform unitContainer;
         [SerializeField] private UnitCatalog unitCatalog;

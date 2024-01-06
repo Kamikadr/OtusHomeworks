@@ -4,7 +4,7 @@ using Zenject;
 
 namespace App.SaveSystem
 {
-    public class ResourcesSaveLoader: SaveLoader<ResourceSnapshot[], ResourceService>
+    public sealed class ResourcesSaveLoader: SaveLoader<ResourceSnapshot[], ResourceService>
     {
         [Inject]
         public ResourcesSaveLoader(GameFacade gameFacade) : base(gameFacade)

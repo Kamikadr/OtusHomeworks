@@ -5,7 +5,7 @@ using Zenject;
 
 namespace Helpers
 {
-    public class UnitManagerHelper: MonoBehaviour
+    public sealed class UnitManagerHelper: MonoBehaviour
     {
         private UnitManager _unitManager;
 

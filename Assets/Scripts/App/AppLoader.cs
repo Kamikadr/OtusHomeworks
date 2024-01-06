@@ -5,7 +5,7 @@ using Zenject;
 
 namespace App
 {
-    public class AppLoader: MonoBehaviour
+    public sealed class AppLoader: MonoBehaviour
     {
         [SerializeField] private LoadingPipeline loadingPipeline;
 

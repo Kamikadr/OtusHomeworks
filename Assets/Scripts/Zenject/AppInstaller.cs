@@ -6,7 +6,7 @@ using Common;
 
 namespace Zenject
 {
-    public class AppInstaller: MonoInstaller
+    public sealed class AppInstaller: MonoInstaller
     {
         public override void InstallBindings()
         {

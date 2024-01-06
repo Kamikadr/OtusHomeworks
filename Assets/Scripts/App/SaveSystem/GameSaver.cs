@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 
 namespace App.SaveSystem
 {
-    public class GameSaver  
+    public sealed class GameSaver  
     {
         private readonly IGameRepository _gameRepository;
 

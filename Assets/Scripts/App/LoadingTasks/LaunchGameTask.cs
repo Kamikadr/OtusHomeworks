@@ -5,7 +5,7 @@ using Zenject;
 namespace App.LoadingTasks
 {
     [CreateAssetMenu(menuName = "Loading Tasks/LaunchGameTask", fileName = "LaunchGameTask")]
-    public class LaunchGameTask: LoadingTask
+    public sealed class LaunchGameTask: LoadingTask
     {
         private GameLauncher _gameLauncher;
         private DiContainer _container;

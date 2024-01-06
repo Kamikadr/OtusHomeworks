@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Common
 {
-    public class DontDestroyOnLoadScript: MonoBehaviour
+    public sealed class DontDestroyOnLoadScript: MonoBehaviour
     {
         private void Awake()
         {

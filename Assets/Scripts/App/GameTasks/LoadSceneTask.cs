@@ -8,7 +8,7 @@ using Zenject;
 namespace App.GameTasks
 {
     [CreateAssetMenu(menuName = "Loading Tasks/LoadSceneTask", fileName = "LoadSceneTask")]
-    public class LoadSceneTask: LoadingTask
+    public sealed class LoadSceneTask: LoadingTask
     {
         private GameFacade _gameFacade;
         private const string GameSceneName = "GameScene";

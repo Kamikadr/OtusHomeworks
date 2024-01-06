@@ -5,7 +5,7 @@ using Zenject;
 namespace App.LoadingTasks
 {
     [CreateAssetMenu(menuName = "Loading Tasks/LoadRepositoryTask", fileName = "LoadRepositoryTask")]
-    public class LoadRepositoryTask: LoadingTask
+    public sealed class LoadRepositoryTask: LoadingTask
     {
         private IGameRepository _gameRepository;
         

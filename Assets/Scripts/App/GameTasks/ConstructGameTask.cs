@@ -5,7 +5,7 @@ using Zenject;
 namespace App.GameTasks
 {
     [CreateAssetMenu(menuName = "Loading Tasks/ConstructGameTask", fileName = "Construct Game Task")]
-    public class ConstructGameTask: LoadingTask
+    public sealed class ConstructGameTask: LoadingTask
     {
         private GameFacade _gameFacade;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace App
 {
     [CreateAssetMenu(menuName = "Loading Tasks/LoadPipeline", fileName = "LoadPipeline")]
-    public class LoadingPipeline: ScriptableObject
+    public sealed class LoadingPipeline: ScriptableObject
     {
         [SerializeField] private LoadingTask[] loadingTasks;
 

@@ -2,7 +2,7 @@ using GameEngine;
 
 namespace App
 {
-    public class GameFacade
+    public sealed class GameFacade
     {
         private GameWrapper _gameWrapper;
         public void SetupGameContext(GameWrapper gameWrapper)

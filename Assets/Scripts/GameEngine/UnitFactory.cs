@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace GameEngine
 {
-    public class UnitFactory
+    public sealed class UnitFactory
     {
         private readonly UnitCatalog _unitCatalog;
         public UnitFactory(UnitCatalog unitCatalog)

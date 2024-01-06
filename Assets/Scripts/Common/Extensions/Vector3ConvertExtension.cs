@@ -1,5 +1,4 @@
-
-
+using Common.Types;
 using UnityEngine;
 
 namespace Common.Extensions

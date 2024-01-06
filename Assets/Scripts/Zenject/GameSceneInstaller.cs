@@ -1,9 +1,7 @@
 using GameEngine;
 using UnityEngine;
-using UnityEngine.Serialization;
-using Zenject;
 
-namespace DefaultNamespace.Zenject
+namespace Zenject
 {
     public class GameSceneInstaller: MonoInstaller
     {

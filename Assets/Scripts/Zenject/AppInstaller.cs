@@ -1,8 +1,10 @@
-using SaveSystem;
-using Tasks.LoadingTasks;
-using Zenject;
+using App;
+using App.LoadingTasks;
+using App.SaveSystem;
+using App.SaveSystem.Interfaces;
+using Common;
 
-namespace DefaultNamespace.Zenject
+namespace Zenject
 {
     public class AppInstaller: MonoInstaller
     {
@@ -14,6 +16,7 @@ namespace DefaultNamespace.Zenject
             Container.Bind<ISaveLoader>().To<ResourcesSaveLoader>().AsSingle();
             Container.Bind<ISaveLoader>().To<UnitSaveLoader>().AsSingle();
             Container.Bind<GameSaver>().AsSingle();
+            Container.Bind<FileEncryptor>().AsSingle();
 
         }
     }

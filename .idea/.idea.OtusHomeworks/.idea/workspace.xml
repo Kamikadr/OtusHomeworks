@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f0c5662f-cc6b-4462-ba43-8ea64b16ea59" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UnitManagerHelper.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UnitManagerHelper.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.OtusHomeworks/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.OtusHomeworks/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/GameScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Objects/ObjectSnapshots/UnitSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Objects/ObjectSnapshots/UnitSnapshot.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Objects/Unit.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Objects/Unit.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Systems/UnitManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Systems/UnitManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveHelper.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveHelper.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/GameSaver.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/GameSaver.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/Interfaces/ISaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/Interfaces/ISaveLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveSystem.asmdef" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/SaveSystem.asmdef" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UnitSaveLoader.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/SaveSystem/UnitSaveLoader.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tasks/GameTasks/LoadDataTask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tasks/GameTasks/LoadDataTask.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Tasks/LoadingTasks/LoadRepositoryTask.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Tasks/LoadingTasks/LoadRepositoryTask.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Zenject/AppInstaller.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Zenject/AppInstaller.cs" afterDir="false" />
-    </list>
+    <list default="true" id="f0c5662f-cc6b-4462-ba43-8ea64b16ea59" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +19,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c2a97e0383e8404c9fc0ae19d58f57f146a800/9b/83c7505d/AsyncMethodBuilderCore.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c2a97e0383e8404c9fc0ae19d58f57f146a800/bf/99dc1385/NullReferenceException.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/c2a97e0383e8404c9fc0ae19d58f57f146a800/d2/ecbc9600/Dictionary`2.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ed5b48b0079f4baf973d490625f571a31a00/26/40d46213/ISaveLoader.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="2aOQMmXjCL6BqUJhpwlvv819h7q" />
   <component name="ProjectViewState">
@@ -115,7 +99,7 @@
       <workItem from="1704456920696" duration="429000" />
       <workItem from="1704457583692" duration="1039000" />
       <workItem from="1704458706082" duration="8565000" />
-      <workItem from="1704520325618" duration="4146000" />
+      <workItem from="1704520325618" duration="11425000" />
     </task>
     <servers />
   </component>
@@ -131,21 +115,8 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/SaveSystem/GameRepository.cs</url>
-          <line>27</line>
-          <properties documentPath="D:\Projects\OtusHomeworks\Assets\Scripts\SaveSystem\GameRepository.cs" initialLine="27" containingFunctionPresentation="Method 'SetData'">
-            <startOffsets>
-              <option value="708" />
-            </startOffsets>
-            <endOffsets>
-              <option value="757" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="15" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/SaveHelper.cs</url>
-          <line>25</line>
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Helpers/SaveHelper.cs</url>
+          <line>26</line>
           <properties documentPath="D:\Projects\OtusHomeworks\Assets\Scripts\EntryPoint.cs" initialLine="25" containingFunctionPresentation="Method 'Save'" />
           <option name="timeStamp" value="16" />
         </line-breakpoint>
@@ -161,6 +132,19 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/Common/FileEncryptor.cs</url>
+          <line>33</line>
+          <properties documentPath="D:\Projects\OtusHomeworks\Assets\Scripts\Common\FileEncryptor.cs" initialLine="32" containingFunctionPresentation="Method 'EncryptAsync'">
+            <startOffsets>
+              <option value="1128" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1200" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -10,10 +10,6 @@ namespace GameEngine
     //Нельзя менять!
     public sealed class Unit : MonoBehaviour, ISnapshotable<UnitSnapshot>
     {
-        public Guid Id
-        {
-            get => id;
-        }
         public string Type
         {
             get => type;
@@ -34,8 +30,7 @@ namespace GameEngine
         {
             get => transform.eulerAngles;
         }
-
-        private Guid id;
+        
         [SerializeField] private string type;
         [SerializeField] private int hitPoints;
 
@@ -44,11 +39,7 @@ namespace GameEngine
             type = name;
             hitPoints = 10;
         }
-
-        public void SetUnitId(Guid unitId)
-        {
-            id = unitId;
-        }
+        
         public void SetSnapshot(UnitSnapshot snapshot)
         {
             type = snapshot.Type;

@@ -39,7 +39,6 @@ namespace GameEngine
         public Unit SpawnUnit(Unit prefab, Vector3 position, Quaternion rotation)
         {
             var unit = Object.Instantiate(prefab, position, rotation, container);
-            unit.SetUnitId(Guid.NewGuid());
             sceneUnits.Add(unit);
             return unit;
         }
@@ -58,7 +57,7 @@ namespace GameEngine
             return sceneUnits;
         }
 
-        public void SetupUnits(UnitSnapshot[] unitSnapshots)
+        public void SetupUnits(IEnumerable<UnitSnapshot> unitSnapshots)
         {
             DestroyAllUnits();
             foreach (var unitSnapshot in unitSnapshots)

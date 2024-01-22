@@ -4,8 +4,8 @@ using UnityEngine;
 namespace Client.Components
 {
     [Serializable]
-    public struct MoveDirection
+    public struct TransformView
     {
-        public Vector3 value;
+        public Transform value;
     }
 }

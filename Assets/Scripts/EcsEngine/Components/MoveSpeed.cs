@@ -3,7 +3,7 @@ using System;
 namespace Client.Components
 {
     [Serializable]
-    public class MoveSpeed
+    public struct MoveSpeed
     {
         public float value;
     }

@@ -1,13 +1,10 @@
 {
-    "name": "EcsEngine",
+    "name": "Content",
     "rootNamespace": "",
     "references": [
+        "GUID:837e4f39d45cac74486f0b605ff0e9e7",
         "GUID:e59bf9fc7d5a44b18a819a92edd46163",
-        "GUID:206779980ac58453ea65e900299ccf71",
-        "GUID:a22362b82293644e1bbe51356c008d63",
-        "GUID:f5f01a091e0d746659b4380253d52f4e",
-        "GUID:a23f4281db8883b4b9d72acad9cb57a4",
-        "GUID:e06a58708b83247ca9dc984644f5b40b"
+        "GUID:a23f4281db8883b4b9d72acad9cb57a4"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

@@ -6,12 +6,15 @@ using UnityEngine;
 
 public class ArcherInstaller : EntityInstaller
 {
+    [SerializeField] private Animator animator;
     protected override void Configure(Entity entity)
     {
         entity.AddComponent(new Position {value = transform.position});
         entity.AddComponent(new MoveSpeed {value = 5f});
         entity.AddComponent(new MoveDirection {value = Vector3.forward});
         entity.AddComponent(new TransformView{value = transform});
+        entity.AddComponent(new AnimatorView{value = animator});
+        entity.AddComponent(new Health{value = 1});
     }
 
     protected override void Dispose(Entity entity)

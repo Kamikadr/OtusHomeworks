@@ -1,36 +1,47 @@
 using System;
+using Client.Components.Events;
 using Client.Services;
 using EcsExtension;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
+using Leopotam.EcsLite.ExtendedSystems;
 using UnityEngine;
 
 namespace Client {
-    sealed class EcsStartup : MonoBehaviour {
-        private EcsWorld _world;        
+    public sealed class EcsStartup : MonoBehaviour {
+        private EcsWorld _world;
+        private EcsWorld _eventWorld;
         private IEcsSystems _systems;
         private EntityManager _entityManager;
 
+
+        public EcsWorld GetWorld(string worldName)
+        {
+            return _systems.GetWorld(worldName);
+        }
         private void Awake()
         {
             _world = new EcsWorld ();
+            _eventWorld = new EcsWorld();
             _systems = new EcsSystems (_world);
+            _systems.AddWorld(_eventWorld, EcsWorlds.EventWorld);
             _entityManager = new EntityManager();
 
             _systems
+                .Add(new DeathRequestSystem())
+                
+                
                 .Add(new MovementSystem())
+                .Add(new HpEmptySystem())
+                
+                
+                //View
+                .Add(new DeathAnimationListener())
                 .Add(new TransformViewSystem())
-                // register your systems here, for example:
-                // .Add (new TestSystem1 ())
-                // .Add (new TestSystem2 ())
-
-                // register additional worlds here, for example:
-                // .AddWorld (new EcsWorld (), "events")
 #if UNITY_EDITOR
-                // add debug systems for custom worlds here, for example:
-                // .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ("events"))
-                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem());
+                .Add(new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem())
 #endif
+                .DelHere<DeathEvent>();
         }
 
         void Start () 

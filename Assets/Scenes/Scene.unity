@@ -203,6 +203,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 74384897}
   m_PrefabAsset: {fileID: 0}
+--- !u!95 &190357600 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1870072544967355838, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1870072545585007306}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &254118204
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -473,6 +479,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8692576747330127514, guid: 9efe60d89fb4b4fa882e16b1af2b6b1a,
     type: 3}
   m_PrefabInstance: {fileID: 8692576747098801704}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &545498179 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1870072543877420731, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1870072545585007306}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &653492620
 GameObject:
@@ -1148,6 +1160,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1870072545585007306}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1707629683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545498179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6532202bf8175dc48948e7f623d341ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 190357600}
+--- !u!114 &1707629684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 545498179}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 697f71733cd10c54cae82c99d32c7c8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  installers:
+  - {fileID: 1707629683}
 --- !u!1001 &1738537723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1627,6 +1666,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Archer (Blue)
       objectReference: {fileID: 0}
+    - target: {fileID: 1870072544967355838, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: eb600aff02ed52346823c36ddae42551, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2edb3dcb9e85f4750b5bc0c0cac3d77f, type: 3}
 --- !u!1001 &7657002863243684347

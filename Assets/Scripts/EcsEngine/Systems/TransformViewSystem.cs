@@ -7,9 +7,8 @@ namespace Client.Services
     public class TransformViewSystem: IEcsRunSystem
     {
         private EcsFilterInject<Inc<Position, TransformView>> _filter;
-        private EcsPoolInject<Position> _positionPool;
-        private EcsPoolInject<TransformView> _transformPool;
-        
+        private EcsPoolInject<Rotation> _rotationPool;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _filter.Value)
@@ -18,6 +17,11 @@ namespace Client.Services
                 var position = _filter.Pools.Inc1.Get(entity);
 
                 transform.value.position = position.value;
+                if (_rotationPool.Value.Has(entity))
+                {
+                    var rotation = _rotationPool.Value.Get(entity);
+                    transform.value.rotation = rotation.value;
+                }
             }
         }
     }
